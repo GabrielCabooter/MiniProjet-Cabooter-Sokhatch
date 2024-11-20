@@ -28,7 +28,7 @@ public class CelluleLumineuse {
      * Active la cellule lumineuse en inversant son état actuel.
      * Si la cellule est allumée, elle devient éteinte, et vice-versa.
      */
-    public void activerCellule() {
+    public void allumerCellule() {
         this.etat = !this.etat;
     }
 
