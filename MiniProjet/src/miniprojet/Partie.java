@@ -5,12 +5,12 @@ package miniprojet;
 
 import java.util.Scanner;
 /**
- * Classe Partie : représente une partie du jeu de cellules lumineuses.
- * Elle gère l'interaction avec la grille et le déroulement du jeu.
+ * Classe Partie : représente une partie du jeu des cellules lumineuses.
+ * Elle gère l'interaction avec la grille, le choix du niveau, et le déroulement du jeu.
  */
 public class Partie {
     private GrilleDeCellules grille;
-    private int nbCoups;
+    private int nbCoups; // Compteur de coups joués par le joueur
     private int nbTours; // Nombre de mélanges lors de l'initialisation
     private int niveauDifficulte;
 
@@ -19,9 +19,20 @@ public class Partie {
      * Initialise une partie avec un niveau choisi par le joueur.
      */
     public Partie() {
-        this.nbCoups = 0;
+        this.nbCoups = 0; // Initialisation du compteur de coups à 0
+        afficherMessageBienvenue();
         choisirNiveauDifficulte();
         initialiserPartie();
+    }
+
+    /**
+     * Affiche le message de bienvenue et explique le but du jeu.
+     */
+    private void afficherMessageBienvenue() {
+        System.out.println("Bienvenue dans le jeu des cellules lumineuses !");
+        System.out.println("Objectif : Éteignez toutes les cellules de la grille.");
+        System.out.println("Chaque action (activer une ligne, une colonne ou une diagonale) inverse l'état des cellules.");
+        System.out.println("Bonne chance !");
     }
 
     /**
@@ -30,7 +41,7 @@ public class Partie {
     private void choisirNiveauDifficulte() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Choisissez un niveau de difficulté :");
+        System.out.println("\nChoisissez un niveau de difficulté :");
         System.out.println("1. Facile (Grille 5x5, 10 mélanges)");
         System.out.println("2. Intermédiaire (Grille 7x7, 20 mélanges)");
         System.out.println("3. Difficile (Grille 10x10, 40 mélanges)");
@@ -74,7 +85,7 @@ public class Partie {
         grille.melangerMatriceAleatoirement(nbTours);
 
         // Afficher l'état initial de la grille mélangée
-        System.out.println("La partie commence avec la grille suivante :");
+        System.out.println("\nLa partie commence avec la grille suivante :");
         afficherGrille();
     }
 
@@ -113,9 +124,6 @@ public class Partie {
     public void lancerPartie() {
         Scanner scanner = new Scanner(System.in);
         String input;
-
-        System.out.println("Bienvenue dans le jeu des cellules lumineuses !");
-        System.out.println("Objectif : Éteignez toutes les cellules de la grille.");
 
         while (true) {
             System.out.println("""
@@ -158,6 +166,9 @@ public class Partie {
 
             // Afficher l'état mis à jour de la grille
             afficherGrille();
+
+            // Affiche le compteur de coups joués
+            System.out.println("Nombre de coups joués : " + nbCoups);
 
             // Vérifie si toutes les cellules sont éteintes, fin du jeu
             if (grille.cellulesToutesEteintes()) {
