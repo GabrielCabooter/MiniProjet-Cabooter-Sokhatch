@@ -16,6 +16,8 @@ public class Partie {
     private int nbTours; // Nombre de mélanges lors de l'initialisation
     private int niveauDifficulte;
     private int tempsLimite; // Temps limite pour terminer la partie
+    private Timer timer; // Chronomètre
+    private boolean partieEnCours; // Indique si la partie est en cours
 
     /**
      * Constructeur par défaut de la classe Partie.
@@ -58,7 +60,7 @@ public class Partie {
                     niveauDifficulte = 1;
                     grille = new GrilleDeCellules(5, 5);
                     nbTours = 10;
-                    tempsLimite = 30; // Temps limite en secondes
+                    tempsLimite = 15; // Temps limite en secondes
                     return;
                 }
                 case "2" -> {
@@ -126,18 +128,24 @@ public class Partie {
     public void lancerPartie() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Temps limite : " + tempsLimite + " secondes. Bonne chance !");
+        partieEnCours = true;
         String input;
 
-        Timer timer = new Timer();
+        // Initialisation du chronomètre
+        timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             int tempsRestant = tempsLimite;
 
             @Override
             public void run() {
+                if (!partieEnCours) {
+                    timer.cancel();
+                    return;
+                }
                 if (tempsRestant == 0) {
                     System.out.println("\nTemps écoulé ! Vous avez perdu.");
+                    terminerPartie(scanner);
                     timer.cancel();
-                    System.exit(0);
                 } else if (tempsRestant == 10) {
                     System.out.println("\nAttention ! Il reste 10 secondes !");
                 }
@@ -146,14 +154,15 @@ public class Partie {
         };
         timer.scheduleAtFixedRate(timerTask, 1000, 1000);
 
-        while (true) {
+        while (partieEnCours) {
             System.out.println("""
                     Choisissez une action :
                     1. Activer une ligne
                     2. Activer une colonne
                     3. Activer la diagonale descendante
                     4. Activer la diagonale montante
-                    5. Quitter""");
+                    5. Relancer la partie
+                    6. Quitter le jeu""");
             System.out.print("Entrez le numéro de votre choix : ");
             input = scanner.nextLine();
 
@@ -175,6 +184,11 @@ public class Partie {
                     grille.activerDiagonaleMontante();
                 }
                 case "5" -> {
+                    System.out.println("Relance de la partie...");
+                    relancerPartie();
+                    return;
+                }
+                case "6" -> {
                     System.out.println("Merci d'avoir joué !");
                     timer.cancel();
                     System.exit(0);
@@ -189,8 +203,46 @@ public class Partie {
             if (grille.cellulesToutesEteintes()) {
                 System.out.println("Félicitations ! Vous avez éteint toutes les cellules !");
                 System.out.println("Nombre total de coups joués : " + nbCoups);
+                terminerPartie(scanner);
                 timer.cancel();
-                break;
+            }
+        }
+    }
+
+    /**
+     * Relance une nouvelle partie.
+     */
+    private void relancerPartie() {
+        timer.cancel();
+        new Partie().lancerPartie();
+    }
+
+    /**
+     * Termine la partie et propose de rejouer ou de quitter.
+     * 
+     * @param scanner Scanner pour lire l'entrée utilisateur.
+     */
+    private void terminerPartie(Scanner scanner) {
+        partieEnCours = false;
+        timer.cancel();
+
+        System.out.println("\nVoulez-vous rejouer ?");
+        System.out.println("1. Oui");
+        System.out.println("2. Non");
+
+        while (true) {
+            System.out.print("Votre choix : ");
+            String choix = scanner.nextLine();
+            switch (choix) {
+                case "1" -> {
+                    relancerPartie();
+                    return;
+                }
+                case "2" -> {
+                    System.out.println("Merci d'avoir joué !");
+                    System.exit(0);
+                }
+                default -> System.out.println("Option invalide. Veuillez choisir 1 ou 2.");
             }
         }
     }
