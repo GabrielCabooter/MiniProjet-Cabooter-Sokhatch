@@ -1,6 +1,6 @@
 /*
  * Projet LightsOff de Gabriel Cabooter et Arthur Sokhatch 
- * Du 20/11/2024 au ???
+ * Du 20/11/2024 au ?
  */
 package miniprojet;
 
