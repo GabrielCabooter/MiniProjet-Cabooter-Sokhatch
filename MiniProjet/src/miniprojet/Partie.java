@@ -4,6 +4,8 @@
 package miniprojet;
 
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 /**
  * Classe Partie : représente une partie du jeu des cellules lumineuses.
  * Elle gère l'interaction avec la grille, le choix du niveau, et le déroulement du jeu.
@@ -13,6 +15,7 @@ public class Partie {
     private int nbCoups; // Compteur de coups joués par le joueur
     private int nbTours; // Nombre de mélanges lors de l'initialisation
     private int niveauDifficulte;
+    private int tempsLimite; // Temps limite pour terminer la partie
 
     /**
      * Constructeur par défaut de la classe Partie.
@@ -42,9 +45,9 @@ public class Partie {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\nChoisissez un niveau de difficulté :");
-        System.out.println("1. Facile (Grille 5x5, 10 mélanges)");
-        System.out.println("2. Intermédiaire (Grille 7x7, 20 mélanges)");
-        System.out.println("3. Difficile (Grille 10x10, 40 mélanges)");
+        System.out.println("1. Facile (Grille 5x5, 10 mélanges, 90 secondes)");
+        System.out.println("2. Intermédiaire (Grille 7x7, 20 mélanges, 120 secondes)");
+        System.out.println("3. Difficile (Grille 10x10, 40 mélanges, 150 secondes)");
 
         while (true) {
             System.out.print("Entrez le numéro de votre choix : ");
@@ -55,18 +58,21 @@ public class Partie {
                     niveauDifficulte = 1;
                     grille = new GrilleDeCellules(5, 5);
                     nbTours = 10;
+                    tempsLimite = 30; // Temps limite en secondes
                     return;
                 }
                 case "2" -> {
                     niveauDifficulte = 2;
                     grille = new GrilleDeCellules(7, 7);
                     nbTours = 20;
+                    tempsLimite = 120;
                     return;
                 }
                 case "3" -> {
                     niveauDifficulte = 3;
                     grille = new GrilleDeCellules(10, 10);
                     nbTours = 40;
+                    tempsLimite = 150;
                     return;
                 }
                 default -> System.out.println("Option invalide. Veuillez choisir 1, 2 ou 3.");
@@ -75,16 +81,12 @@ public class Partie {
     }
 
     /**
-     * Initialise la partie en éteignant toutes les cellules de la grille,
-     * puis en mélangeant la grille.
+     * Initialise la partie en mélangeant la grille.
      */
     public void initialiserPartie() {
         grille.eteindreToutesLesCellules();
-
-        // Mélange la grille avec le nombre de tours spécifique
         grille.melangerMatriceAleatoirement(nbTours);
 
-        // Afficher l'état initial de la grille mélangée
         System.out.println("\nLa partie commence avec la grille suivante :");
         afficherGrille();
     }
@@ -119,11 +121,30 @@ public class Partie {
     }
 
     /**
-     * Lance la partie et gère le déroulement du jeu.
+     * Lance la partie et gère le chronomètre.
      */
     public void lancerPartie() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Temps limite : " + tempsLimite + " secondes. Bonne chance !");
         String input;
+
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            int tempsRestant = tempsLimite;
+
+            @Override
+            public void run() {
+                if (tempsRestant == 0) {
+                    System.out.println("\nTemps écoulé ! Vous avez perdu.");
+                    timer.cancel();
+                    System.exit(0);
+                } else if (tempsRestant == 10) {
+                    System.out.println("\nAttention ! Il reste 10 secondes !");
+                }
+                tempsRestant--;
+            }
+        };
+        timer.scheduleAtFixedRate(timerTask, 1000, 1000);
 
         while (true) {
             System.out.println("""
@@ -155,26 +176,21 @@ public class Partie {
                 }
                 case "5" -> {
                     System.out.println("Merci d'avoir joué !");
-                    scanner.close();
-                    return; // Quitte la méthode
+                    timer.cancel();
+                    System.exit(0);
                 }
                 default -> System.out.println("Option invalide. Veuillez réessayer.");
             }
 
-            // Augmente le compteur de coups
             nbCoups++;
-
-            // Afficher l'état mis à jour de la grille
             afficherGrille();
-
-            // Affiche le compteur de coups joués
             System.out.println("Nombre de coups joués : " + nbCoups);
 
-            // Vérifie si toutes les cellules sont éteintes, fin du jeu
             if (grille.cellulesToutesEteintes()) {
                 System.out.println("Félicitations ! Vous avez éteint toutes les cellules !");
                 System.out.println("Nombre total de coups joués : " + nbCoups);
-                break; // Quitte la boucle si le joueur gagne
+                timer.cancel();
+                break;
             }
         }
     }
