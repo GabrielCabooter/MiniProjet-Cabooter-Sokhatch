@@ -4,7 +4,6 @@
 package miniprojet;
 
 import java.util.Scanner;
-
 /**
  * Classe Partie : représente une partie du jeu de cellules lumineuses.
  * Elle gère l'interaction avec la grille et le déroulement du jeu.
@@ -12,35 +11,67 @@ import java.util.Scanner;
 public class Partie {
     private GrilleDeCellules grille;
     private int nbCoups;
+    private int nbTours; // Nombre de mélanges lors de l'initialisation
+    private int niveauDifficulte;
 
     /**
-     * Constructeur de la classe Partie.
-     * Initialise une nouvelle grille avec les dimensions spécifiées et mélange la grille.
-     * 
-     * @param nbLignes   Le nombre de lignes de la grille.
-     * @param nbColonnes Le nombre de colonnes de la grille.
+     * Constructeur par défaut de la classe Partie.
+     * Initialise une partie avec un niveau choisi par le joueur.
      */
-    public Partie(int nbLignes, int nbColonnes) {
-        this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
+    public Partie() {
         this.nbCoups = 0;
+        choisirNiveauDifficulte();
         initialiserPartie();
     }
 
     /**
+     * Permet au joueur de choisir le niveau de difficulté.
+     */
+    private void choisirNiveauDifficulte() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Choisissez un niveau de difficulté :");
+        System.out.println("1. Facile (Grille 5x5, 10 mélanges)");
+        System.out.println("2. Intermédiaire (Grille 7x7, 20 mélanges)");
+        System.out.println("3. Difficile (Grille 10x10, 40 mélanges)");
+
+        while (true) {
+            System.out.print("Entrez le numéro de votre choix : ");
+            String input = scanner.nextLine();
+
+            switch (input) {
+                case "1" -> {
+                    niveauDifficulte = 1;
+                    grille = new GrilleDeCellules(5, 5);
+                    nbTours = 10;
+                    return;
+                }
+                case "2" -> {
+                    niveauDifficulte = 2;
+                    grille = new GrilleDeCellules(7, 7);
+                    nbTours = 20;
+                    return;
+                }
+                case "3" -> {
+                    niveauDifficulte = 3;
+                    grille = new GrilleDeCellules(10, 10);
+                    nbTours = 40;
+                    return;
+                }
+                default -> System.out.println("Option invalide. Veuillez choisir 1, 2 ou 3.");
+            }
+        }
+    }
+
+    /**
      * Initialise la partie en éteignant toutes les cellules de la grille,
-     * puis en mélangeant la grille et en s'assurant qu'elle est résolvable.
+     * puis en mélangeant la grille.
      */
     public void initialiserPartie() {
         grille.eteindreToutesLesCellules();
-        
-        // Mélange la grille de manière aléatoire
-        grille.melangerMatriceAleatoirement(10);  // Mélanger avec 10 tours ou un nombre adapté
 
-        // S'assurer que la grille est résolvable
-        if (!estGrilleResolvable()) {
-            System.out.println("La grille générée n'est pas résolvable, une nouvelle grille est générée.");
-            initialiserPartie();  // Réinitialiser si la grille n'est pas résolvable
-        }
+        // Mélange la grille avec le nombre de tours spécifique
+        grille.melangerMatriceAleatoirement(nbTours);
 
         // Afficher l'état initial de la grille mélangée
         System.out.println("La partie commence avec la grille suivante :");
@@ -48,25 +79,7 @@ public class Partie {
     }
 
     /**
-     * Vérifie si la grille est résolvable.
-     * 
-     * @return true si la grille est résolvable, sinon false.
-     */
-    private boolean estGrilleResolvable() {
-        // Une grille est considérée comme résolvable si le nombre de cellules allumées est pair
-        int allumees = 0;
-        for (int i = 0; i < grille.getNbLignes(); i++) {
-            for (int j = 0; j < grille.getNbColonnes(); j++) {
-                if (grille.getCellule(i, j).getEtat()) {
-                    allumees++;
-                }
-            }
-        }
-        return allumees % 2 == 0; // Si le nombre de cellules allumées est pair, la grille est résolvable
-    }
-
-    /**
-     * Affiche l'état actuel de la grille de jeu.
+     * Méthode pour afficher l'état actuel de la grille.
      */
     public void afficherGrille() {
         System.out.println(grille);
@@ -140,12 +153,16 @@ public class Partie {
                 default -> System.out.println("Option invalide. Veuillez réessayer.");
             }
 
+            // Augmente le compteur de coups
+            nbCoups++;
+
             // Afficher l'état mis à jour de la grille
             afficherGrille();
 
             // Vérifie si toutes les cellules sont éteintes, fin du jeu
             if (grille.cellulesToutesEteintes()) {
                 System.out.println("Félicitations ! Vous avez éteint toutes les cellules !");
+                System.out.println("Nombre total de coups joués : " + nbCoups);
                 break; // Quitte la boucle si le joueur gagne
             }
         }
