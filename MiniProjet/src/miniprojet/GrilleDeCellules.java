@@ -47,7 +47,24 @@ public class GrilleDeCellules {
             }
         }
     }
+// Méthode pour obtenir le nombre de lignes
+    public int getNbLignes() {
+        return nbLignes;
+    }
 
+    // Méthode pour obtenir le nombre de colonnes
+    public int getNbColonnes() {
+        return nbColonnes;
+    }
+    
+    // Méthode pour obtenir une cellule spécifique
+    public CelluleLumineuse getCellule(int ligne, int colonne) {
+        if (ligne >= 0 && ligne < nbLignes && colonne >= 0 && colonne < nbColonnes) {
+            return matriceCellules[ligne][colonne];
+        } else {
+            throw new IndexOutOfBoundsException("Indices de cellule invalides");
+        }
+    }
     /**
      * Éteint toutes les cellules de la grille.
      * Chaque cellule est mise à l'état "éteint".
@@ -178,5 +195,6 @@ public class GrilleDeCellules {
         }
         return sb.toString();
     }
+    
     
 }

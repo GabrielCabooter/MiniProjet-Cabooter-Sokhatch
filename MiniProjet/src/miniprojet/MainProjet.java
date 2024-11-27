@@ -9,13 +9,8 @@ package miniprojet;
  */
 public class MainProjet {
     public static void main(String[] args) {
-        // Création d'une partie avec une grille de 5x5
+        // Créez une nouvelle partie avec une grille de 5 lignes et 5 colonnes
         Partie partie = new Partie(5, 5);
-
-        // Initialisation de la partie
-        partie.initialiserPartie();
-
-        // Lancement de la partie
-        partie.lancerPartie();
+        partie.lancerPartie();  // Lance la partie
     }
 }
