@@ -49,7 +49,7 @@ public class Partie {
                     niveauDifficulte = 1;
                     grille = new GrilleDeCellules(5, 5);
                     nbTours = 10;
-                    tempsLimite = 15;
+                    tempsLimite = 10;
                     return;
                 }
                 case "2" -> {
@@ -109,7 +109,7 @@ public class Partie {
             @Override
             public void run() {
                 if (tempsRestant == 0) {
-                    System.out.println("\nTemps écoulé ! Vous avez perdu.");
+                    System.out.println("\nTemps écoulé ! Vous avez perdu."+"\nTaper 5 pour relancer une partie et 6 Pour Quiiter ");
                     timer.cancel();
                     
                 } else if (tempsRestant == 10) {
