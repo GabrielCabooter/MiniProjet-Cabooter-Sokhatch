@@ -70,6 +70,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jButton20 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
         jButton22 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
 
@@ -92,7 +93,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 510, 500));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setLayout(new java.awt.GridLayout(10, 0));
+        jPanel1.setLayout(new java.awt.GridLayout(10, 1));
 
         jButton1.setText("L1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -260,8 +261,15 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 510, 50));
 
+        jPanel3.setLayout(new java.awt.GridLayout(1, 3));
+
         jButton11.setText("DA");
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 590, 65, 44));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton11);
 
         jButton12.setText("DD");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -269,7 +277,9 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton12ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 590, 50, 50));
+        jPanel3.add(jButton12);
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 570, 230, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -390,6 +400,11 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         repaint();
     }//GEN-LAST:event_jButton12ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        this.grille.activerDiagonaleMontante();
+        repaint();
+    }//GEN-LAST:event_jButton11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -451,5 +466,6 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
