@@ -16,7 +16,7 @@ public class GrilleDeCellules {
      * Matrice de cellules lumineuses organisées en lignes et colonnes.
      * Chaque cellule est une instance de la classe {@link CelluleLumineuse}.
      */
-    private CelluleLumineuse[][] matriceCellules;
+    public CelluleLumineuse[][] matriceCellules;
 
     /**
      * Le nombre de lignes dans la grille.
