@@ -1,6 +1,7 @@
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import miniprojet.GrilleDeCellules;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,7 +13,8 @@ import javax.swing.JButton;
  * @author gabri
  */
 public class FenetrePrincipal extends javax.swing.JFrame {
-
+   private GrilleDeCellules grille;
+    private int nbCoups;
     /**
      * Creates new form FenetrePrincipal
      */
@@ -20,6 +22,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         initComponents();
         int nbLignes = 10;
         int nbColonnes = 10;
+        this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
         for (int i=0; i < nbLignes; i++) {
         for (int j=0; j < nbColonnes; j++ ) {
@@ -28,7 +31,11 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 }
 }
     }
-
+    public void initialiserPartie() {
+    grille.eteindreToutesLesCellules();
+    grille.melangerMatriceAleatoirement(10);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,7 +63,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
-        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 400, 400));
+        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 400, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
