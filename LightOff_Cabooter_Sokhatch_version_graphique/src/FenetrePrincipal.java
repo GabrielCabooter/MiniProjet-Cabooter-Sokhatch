@@ -7,14 +7,15 @@ import miniprojet.GrilleDeCellules;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  *
  */
 public class FenetrePrincipal extends javax.swing.JFrame {
-   private GrilleDeCellules grille;
+
+    private GrilleDeCellules grille;
     private int nbCoups;
+
     /**
      * Creates new form FenetrePrincipal
      */
@@ -24,18 +25,19 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         int nbColonnes = 10;
         this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
-        for (int i=0; i < nbLignes; i++) {
-        for (int j=0; j < nbColonnes; j++ ) {
-        CelluleGraphique bouton_cellule = new CelluleGraphique( grille.matriceCellules[i][j], 36,36); 
-        PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
-}
-}
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                CelluleGraphique bouton_cellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
+                PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
+            }
+        }
     }
+
     public void initialiserPartie() {
-    grille.eteindreToutesLesCellules();
-    grille.melangerMatriceAleatoirement(10);
+        grille.eteindreToutesLesCellules();
+        grille.melangerMatriceAleatoirement(10);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,7 +82,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new java.awt.GridLayout(11, 1));
 
-        jButton1.setText("btnLigne0");
+        jButton1.setText("L1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -88,31 +90,71 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1);
 
-        jButton2.setText("btnLigne1");
+        jButton2.setText("L2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
 
-        jButton3.setText("btnLigne2");
+        jButton3.setText("L3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
 
-        jButton4.setText("btnLigne3");
+        jButton4.setText("L4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4);
 
-        jButton5.setText("btnLigne4");
+        jButton5.setText("L5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton5);
 
-        jButton6.setText("btnLigne5");
+        jButton6.setText("L6");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton6);
 
-        jButton7.setText("btnLigne6");
+        jButton7.setText("L7");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton7);
 
-        jButton8.setText("btnLigne7");
+        jButton8.setText("L8");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton8);
 
-        jButton9.setText("btnLigne8");
+        jButton9.setText("L9");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton9);
 
-        jButton10.setText("btnLigne9");
+        jButton10.setText("L10");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -120,7 +162,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         });
         jPanel1.add(jButton10);
 
-        jButton11.setText("btndiagonale");
+        jButton11.setText("DA");
         jPanel1.add(jButton11);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 440));
@@ -129,14 +171,54 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         this.grille.activerLigneDeCellules(0);
         repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+        this.grille.activerLigneDeCellules(9);
+        repaint();
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.grille.activerLigneDeCellules(1);
+        repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.grille.activerLigneDeCellules(2);
+        repaint();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.grille.activerLigneDeCellules(3);
+        repaint();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.grille.activerLigneDeCellules(4);
+        repaint();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        this.grille.activerLigneDeCellules(5);
+        repaint();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        this.grille.activerLigneDeCellules(6);
+        repaint();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        this.grille.activerLigneDeCellules(7);
+        repaint();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        this.grille.activerLigneDeCellules(8);
+        repaint();
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
