@@ -1,6 +1,5 @@
 
 import java.awt.GridLayout;
-import javax.swing.JButton;
 import miniprojet.GrilleDeCellules;
 
 /*
@@ -12,7 +11,7 @@ import miniprojet.GrilleDeCellules;
  *
  */
 public class FenetrePrincipal extends javax.swing.JFrame {
-
+    
     private GrilleDeCellules grille;
     private int nbCoups;
 
@@ -31,6 +30,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
             }
         }
+     
     }
 
     public void initialiserPartie() {
@@ -48,7 +48,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         PanneauGrille = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        PanneauBoutonsVerticaux = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -59,7 +59,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        PanneauBoutonsHorizontaux = new javax.swing.JPanel();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
@@ -70,7 +70,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jButton20 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
         jButton22 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        PanneauBoutonsDiagonales = new javax.swing.JPanel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
 
@@ -92,8 +92,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 510, 500));
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setLayout(new java.awt.GridLayout(10, 1));
+        PanneauBoutonsVerticaux.setBackground(new java.awt.Color(204, 204, 204));
+        PanneauBoutonsVerticaux.setLayout(new java.awt.GridLayout(10, 1));
 
         jButton1.setText("L1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +101,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
+        PanneauBoutonsVerticaux.add(jButton1);
 
         jButton2.setText("L2");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +109,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
+        PanneauBoutonsVerticaux.add(jButton2);
 
         jButton3.setText("L3");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +117,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3);
+        PanneauBoutonsVerticaux.add(jButton3);
 
         jButton4.setText("L4");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +125,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4);
+        PanneauBoutonsVerticaux.add(jButton4);
 
         jButton5.setText("L5");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +133,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5);
+        PanneauBoutonsVerticaux.add(jButton5);
 
         jButton6.setText("L6");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +141,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6);
+        PanneauBoutonsVerticaux.add(jButton6);
 
         jButton7.setText("L7");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +149,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7);
+        PanneauBoutonsVerticaux.add(jButton7);
 
         jButton8.setText("L8");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +157,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton8);
+        PanneauBoutonsVerticaux.add(jButton8);
 
         jButton9.setText("L9");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +165,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton9);
+        PanneauBoutonsVerticaux.add(jButton9);
 
         jButton10.setText("L10");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -173,11 +173,11 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton10);
+        PanneauBoutonsVerticaux.add(jButton10);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 90, 500));
+        getContentPane().add(PanneauBoutonsVerticaux, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 90, 500));
 
-        jPanel2.setLayout(new java.awt.GridLayout(1, 10));
+        PanneauBoutonsHorizontaux.setLayout(new java.awt.GridLayout(1, 10));
 
         jButton13.setText("C1");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +185,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton13ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton13);
+        PanneauBoutonsHorizontaux.add(jButton13);
 
         jButton14.setText("C2");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +193,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton14ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton14);
+        PanneauBoutonsHorizontaux.add(jButton14);
 
         jButton15.setText("C3");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +201,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton15ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton15);
+        PanneauBoutonsHorizontaux.add(jButton15);
 
         jButton16.setText("C4");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +209,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton16ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton16);
+        PanneauBoutonsHorizontaux.add(jButton16);
 
         jButton17.setText("C5");
         jButton17.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +217,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton17ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton17);
+        PanneauBoutonsHorizontaux.add(jButton17);
 
         jButton18.setText("C6");
         jButton18.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +225,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton18ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton18);
+        PanneauBoutonsHorizontaux.add(jButton18);
 
         jButton19.setText("C7");
         jButton19.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +233,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton19ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton19);
+        PanneauBoutonsHorizontaux.add(jButton19);
 
         jButton20.setText("C8");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +241,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton20ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton20);
+        PanneauBoutonsHorizontaux.add(jButton20);
 
         jButton21.setText("C9");
         jButton21.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +249,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton21ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton21);
+        PanneauBoutonsHorizontaux.add(jButton21);
 
         jButton22.setText("C10");
         jButton22.addActionListener(new java.awt.event.ActionListener() {
@@ -257,11 +257,11 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton22ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton22);
+        PanneauBoutonsHorizontaux.add(jButton22);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 510, 50));
+        getContentPane().add(PanneauBoutonsHorizontaux, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 510, 50));
 
-        jPanel3.setLayout(new java.awt.GridLayout(1, 3));
+        PanneauBoutonsDiagonales.setLayout(new java.awt.GridLayout(1, 3));
 
         jButton11.setText("DA");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -269,7 +269,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton11);
+        PanneauBoutonsDiagonales.add(jButton11);
 
         jButton12.setText("DD");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -277,9 +277,9 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 jButton12ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton12);
+        PanneauBoutonsDiagonales.add(jButton12);
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 570, 230, 50));
+        getContentPane().add(PanneauBoutonsDiagonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 570, 230, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -441,6 +441,9 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanneauBoutonsDiagonales;
+    private javax.swing.JPanel PanneauBoutonsHorizontaux;
+    private javax.swing.JPanel PanneauBoutonsVerticaux;
     private javax.swing.JPanel PanneauGrille;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -464,8 +467,5 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
