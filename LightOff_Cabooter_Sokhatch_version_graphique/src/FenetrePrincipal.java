@@ -10,7 +10,7 @@ import miniprojet.GrilleDeCellules;
 
 /**
  *
- * @author gabri
+ *
  */
 public class FenetrePrincipal extends javax.swing.JFrame {
    private GrilleDeCellules grille;
