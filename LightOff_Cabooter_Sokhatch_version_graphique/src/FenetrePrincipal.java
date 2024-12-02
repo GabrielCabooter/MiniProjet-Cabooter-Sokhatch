@@ -59,9 +59,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
@@ -72,6 +70,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jButton20 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
         jButton22 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -82,17 +82,17 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         PanneauGrille.setLayout(PanneauGrilleLayout);
         PanneauGrilleLayout.setHorizontalGroup(
             PanneauGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 510, Short.MAX_VALUE)
         );
         PanneauGrilleLayout.setVerticalGroup(
             PanneauGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
 
-        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 400, 400));
+        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 510, 500));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setLayout(new java.awt.GridLayout(11, 1));
+        jPanel1.setLayout(new java.awt.GridLayout(10, 0));
 
         jButton1.setText("L1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -174,20 +174,9 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         });
         jPanel1.add(jButton10);
 
-        jButton11.setText("DA");
-        jPanel1.add(jButton11);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 90, 500));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 440));
-
-        jPanel2.setLayout(new java.awt.GridLayout());
-
-        jButton12.setText("DD");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton12);
+        jPanel2.setLayout(new java.awt.GridLayout(1, 10));
 
         jButton13.setText("C1");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -269,7 +258,18 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(jButton22);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 440, 50));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 510, 50));
+
+        jButton11.setText("DA");
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 590, 65, 44));
+
+        jButton12.setText("DD");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 590, 50, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
