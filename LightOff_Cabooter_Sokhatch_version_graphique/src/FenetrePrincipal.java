@@ -39,9 +39,11 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }
 
     public void initialiserPartie() {
-        grille.eteindreToutesLesCellules();
-        grille.melangerMatriceAleatoirement(10);
+        grille.eteindreToutesLesCellules(); // Éteint toutes les cellules au début
+        grille.melangerMatriceAleatoirement(10); // Mélange la grille
+        nbCoups = 0; // Réinitialise le compteur de coups
     }
+    
     private void gererCoup(Runnable action) {
         action.run(); // Exécute l'action (ligne, colonne ou diagonale)
         nbCoups++; // Incrémente le compteur de coups
