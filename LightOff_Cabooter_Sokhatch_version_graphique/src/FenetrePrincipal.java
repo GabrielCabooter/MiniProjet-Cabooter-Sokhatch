@@ -17,20 +17,24 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form FenetrePrincipal
+     * @param nbLignes
+     * @param nbColonnes
      */
-    public FenetrePrincipal() {
-        initComponents();
-        int nbLignes = 10;
-        int nbColonnes = 10;
-        this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
-        PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
-        for (int i = 0; i < nbLignes; i++) {
-            for (int j = 0; j < nbColonnes; j++) {
-                CelluleGraphique bouton_cellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
-                PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
-            }
+    public FenetrePrincipal(int nbLignes, int nbColonnes) {
+    initComponents();
+    this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
+    PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
+    for (int i = 0; i < nbLignes; i++) {
+        for (int j = 0; j < nbColonnes; j++) {
+            CelluleGraphique bouton_cellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
+            PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
         }
-     
+    }
+    this.pack(); // Ajuste la fenêtre à son contenu
+}
+
+    private FenetrePrincipal() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public void initialiserPartie() {

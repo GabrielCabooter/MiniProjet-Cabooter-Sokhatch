@@ -42,8 +42,18 @@ public class ChoixDiff extends javax.swing.JFrame {
         });
 
         jButton2.setText("Intermédiaire");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Difficile");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,8 +100,24 @@ public class ChoixDiff extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    FenetrePrincipal fenetre = new FenetrePrincipal(5, 5);
+    fenetre.setVisible(true);
+    this.dispose(); // Ferme la fenêtre actuelle        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    // Intermédiaire : 7x7
+    FenetrePrincipal fenetre = new FenetrePrincipal(7, 7);
+    fenetre.setVisible(true);
+    this.dispose(); // Ferme la fenêtre actuelle    // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    // Difficile : 10x10
+    FenetrePrincipal fenetre = new FenetrePrincipal(10, 10);
+    fenetre.setVisible(true);
+    this.dispose(); // Ferme la fenêtre actuelle    // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
