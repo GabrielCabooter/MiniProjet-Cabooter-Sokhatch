@@ -29,6 +29,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         for (int j = 0; j < nbColonnes; j++) {
             CelluleGraphique bouton_cellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
             PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
+            grille.melangerMatriceAleatoirement(10); // Mélange la grille
         }
     }
     this.pack(); // Ajuste la fenêtre à son contenu
