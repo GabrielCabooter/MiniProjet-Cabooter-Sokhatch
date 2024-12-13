@@ -28,8 +28,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
          // Configuration des panneaux
         configureGrillePanel(nbLignes, nbColonnes);
-        configureColumnButtons(nbColonnes);
-
+        configureColonneButtons(nbColonnes);
+        configureLigneButtons(nbLignes);
         this.pack(); // Ajuste la fenêtre à son contenu
     }
 
@@ -57,7 +57,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
 
 
-    private void configureColumnButtons(int nbColonnes) {
+    private void configureColonneButtons(int nbColonnes) {
         PanneauBoutonsHorizontaux.removeAll();
         PanneauBoutonsHorizontaux.setLayout(new GridLayout(1, nbColonnes));
         for (int i = 0; i < nbColonnes; i++) {
@@ -72,7 +72,23 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         PanneauBoutonsHorizontaux.revalidate();
         PanneauBoutonsHorizontaux.repaint();
     }
+    
+    
+    private void configureLigneButtons(int nbLignes) {
+        PanneauBoutonsVerticaux.removeAll();
+        PanneauBoutonsVerticaux.setLayout(new GridLayout(nbLignes, 1));
+        for (int i = 0; i < nbLignes; i++) {
+            JButton btnLigne = new JButton("L" + (i + 1));
+            int rowIndex = i;
+            btnLigne.addActionListener(evt -> {
+                gererCoup(() -> grille.activerLigneDeCellules(rowIndex));
+            });
+            PanneauBoutonsVerticaux.add(btnLigne);
+        }
 
+        PanneauBoutonsVerticaux.revalidate();
+        PanneauBoutonsVerticaux.repaint();
+    }
 
 
    
