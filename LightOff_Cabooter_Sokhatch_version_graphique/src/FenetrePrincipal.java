@@ -1,5 +1,6 @@
 
 import java.awt.GridLayout;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import miniprojet.GrilleDeCellules;
 
@@ -25,8 +26,9 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         initComponents();
         this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
 
-        // Configuration des panneaux
+         // Configuration des panneaux
         configureGrillePanel(nbLignes, nbColonnes);
+        configureColumnButtons(nbColonnes);
 
         this.pack(); // Ajuste la fenêtre à son contenu
     }
@@ -38,7 +40,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
   
 
     
-private void configureGrillePanel(int nbLignes, int nbColonnes) {
+    private void configureGrillePanel(int nbLignes, int nbColonnes) {
         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
         grille.melangerMatriceAleatoirement(10); // Mélange initial de la grille
 
@@ -53,6 +55,27 @@ private void configureGrillePanel(int nbLignes, int nbColonnes) {
         PanneauGrille.repaint();
     }
 
+
+
+    private void configureColumnButtons(int nbColonnes) {
+        PanneauBoutonsHorizontaux.removeAll();
+        PanneauBoutonsHorizontaux.setLayout(new GridLayout(1, nbColonnes));
+        for (int i = 0; i < nbColonnes; i++) {
+            JButton btnColonne = new JButton("C" + (i + 1));
+            int colIndex = i;
+            btnColonne.addActionListener(evt -> {
+                gererCoup(() -> grille.activerColonneDeCellules(colIndex));
+            });
+            PanneauBoutonsHorizontaux.add(btnColonne);
+        }
+
+        PanneauBoutonsHorizontaux.revalidate();
+        PanneauBoutonsHorizontaux.repaint();
+    }
+
+
+
+   
     public void initialiserPartie() {
         grille.eteindreToutesLesCellules(); // Éteint toutes les cellules au début
         grille.melangerMatriceAleatoirement(10); // Mélange la grille
