@@ -12,31 +12,45 @@ import miniprojet.GrilleDeCellules;
  *
  */
 public class FenetrePrincipal extends javax.swing.JFrame {
-    
+
     private GrilleDeCellules grille;
     private int nbCoups;
 
     /**
-     * Creates new form FenetrePrincipal
-     * @param nbLignes
-     * @param nbColonnes
+     * Creates new form FenetrePrincipale
+     * @param nbLignes Nombre de lignes dans la grille
+     * @param nbColonnes Nombre de colonnes dans la grille
      */
     public FenetrePrincipal(int nbLignes, int nbColonnes) {
-    initComponents();
-    this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
-    PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
-    for (int i = 0; i < nbLignes; i++) {
-        for (int j = 0; j < nbColonnes; j++) {
-            CelluleGraphique bouton_cellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
-            PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
-            grille.melangerMatriceAleatoirement(10); // Mélange la grille
-        }
+        initComponents();
+        this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
+
+        // Configuration des panneaux
+        configureGrillePanel(nbLignes, nbColonnes);
+
+        this.pack(); // Ajuste la fenêtre à son contenu
     }
-    this.pack(); // Ajuste la fenêtre à son contenu
-}
 
     private FenetrePrincipal() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+  
+
+    
+private void configureGrillePanel(int nbLignes, int nbColonnes) {
+        PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
+        grille.melangerMatriceAleatoirement(10); // Mélange initial de la grille
+
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                CelluleGraphique boutonCellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
+                PanneauGrille.add(boutonCellule);
+            }
+        }
+
+        PanneauGrille.revalidate();
+        PanneauGrille.repaint();
     }
 
     public void initialiserPartie() {
