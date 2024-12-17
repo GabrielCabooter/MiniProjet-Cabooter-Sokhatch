@@ -26,6 +26,10 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         configureGrillePanel(nbLignes, nbColonnes);
         configureColonneButtons(nbColonnes);
         configureLigneButtons(nbLignes);
+        
+        // Initialisation du compteur de coups
+        nbCoups = 0;
+        jLabel2.setText("Coups: " + nbCoups); // Initialisation du texte du JLabel des coups
 
         // Définition du temps en fonction du nombre de colonnes (niveau de difficulté)
         switch (nbColonnes) {
@@ -156,6 +160,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private void gererCoup(Runnable action) {
         action.run(); // Exécute l'action (ligne, colonne ou diagonale)
         nbCoups++; // Incrémente le compteur de coups
+        jLabel2.setText("Coups: " + nbCoups); // Met à jour le texte du JLabel avec le nombre de coups
         repaint(); // Redessine la grille
 
         verifierVictoire();
@@ -202,6 +207,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         PanneauTimer = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -422,8 +428,15 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         getContentPane().add(PanneauTimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 220, 70));
 
         jPanel1.setBackground(new java.awt.Color(102, 255, 102));
-        jPanel1.setLayout(new java.awt.GridLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, 130, 70));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("nbCoups");
+        jPanel1.add(jLabel2);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, 220, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -596,6 +609,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
