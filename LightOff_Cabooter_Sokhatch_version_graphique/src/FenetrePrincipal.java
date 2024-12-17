@@ -9,7 +9,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
     private GrilleDeCellules grille;
     private int nbCoups;
-    private int tempsEcoule; // Variable pour suivre le temps écoulé
+    private int tempsRestant; // Variable pour suivre le temps restant
     private Timer timer; // Le Timer pour mettre à jour le temps
 
     /**
@@ -18,31 +18,60 @@ public class FenetrePrincipal extends javax.swing.JFrame {
      * @param nbColonnes Nombre de colonnes dans la grille
      */
     public FenetrePrincipal(int nbLignes, int nbColonnes) {
-    initComponents(); // Cette ligne initialise tous les composants de l'interface, y compris jLabel1
+        initComponents(); // Initialise tous les composants de l'interface, y compris jLabel1
 
-    // Initialisation du temps écoulé
-    tempsEcoule = 0;
+        // Initialisation de la grille avant son utilisation
+        this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
 
-    // Initialisation de la grille avant son utilisation
-    this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
+        // Configuration des panneaux
+        configureGrillePanel(nbLignes, nbColonnes);
+        configureColonneButtons(nbColonnes);
+        configureLigneButtons(nbLignes);
 
-    // Configuration des panneaux
-    configureGrillePanel(nbLignes, nbColonnes);
-    configureColonneButtons(nbColonnes);
-    configureLigneButtons(nbLignes);
+        // Définition du temps en fonction du nombre de colonnes (niveau de difficulté)
+        switch (nbColonnes) {
+            case 5:
+                tempsRestant = 2 * 60; // 2 minutes
+                break;
+            case 7:
+                tempsRestant = 3 * 60; // 3 minutes
+                break;
+            case 10:
+                tempsRestant = 5 * 60; // 5 minutes
+                break;
+            default:
+                tempsRestant = 2 * 60; // Par défaut, 2 minutes
+        }
 
-    // Création du Timer qui met à jour le temps toutes les secondes
-    timer = new Timer(1000, e -> {
-        tempsEcoule++; // Incrémente le temps écoulé
-        jLabel1.setText("Temps: " + tempsEcoule + " s"); // Met à jour le texte de jLabel1
-    });
+        // Création du Timer qui met à jour le temps chaque seconde
+        timer = new Timer(1000, e -> {
+            tempsRestant--; // Décrémente le temps restant
+            jLabel1.setText("Temps restant: " + formatTemps(tempsRestant)); // Met à jour le texte de jLabel1
 
-    // Démarrer le Timer
-    timer.start();
+            // Si le temps est écoulé, arrête le jeu et affiche une fenêtre de défaite
+            if (tempsRestant <= 0) {
+                timer.stop(); // Arrête le timer
+                JOptionPane.showMessageDialog(this, "Temps écoulé! Vous avez perdu.");
+                desactiverBoutons(); // Désactive tous les boutons
+            }
+        });
 
-    this.pack(); // Ajuste la fenêtre à son contenu
+        // Démarre le Timer
+        timer.start();
+
+        this.pack(); // Ajuste la fenêtre à son contenu
     }
 
+    // Formate le temps restant sous la forme mm:ss
+    private String formatTemps(int tempsRestant) {
+        int minutes = tempsRestant / 60;
+        int secondes = tempsRestant % 60;
+        return String.format("%02d:%02d", minutes, secondes);
+    }
+
+    
+    
+    
 
     private FenetrePrincipal() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
