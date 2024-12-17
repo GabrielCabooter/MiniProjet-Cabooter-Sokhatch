@@ -36,7 +36,7 @@ public class CelluleGraphique extends JButton {
         this.celluleLumineuseAssociee = celluleLumineuseAssociee;
 
         // Configuration de base du bouton
-        setOpaque(true); // Permet au bouton d'afficher sa couleur de fond
+        setOpaque(false); // Permet au bouton d'afficher sa couleur de fond
         setBorderPainted(false); // Supprime la bordure pour un meilleur rendu visuel
     }
 
