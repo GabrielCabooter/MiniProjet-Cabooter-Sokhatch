@@ -3,19 +3,18 @@ import javax.swing.*;
 
 public class RegleDuJeu extends JFrame {
 
-
 // Déclaration des composants
-        public RegleDuJeu() {
+    public RegleDuJeu() {
         initComponents();
         setTitle("Règles du Jeu");
-        
-        setSize(700,720); // Taille de la fenêtre
-        
+
+        setSize(700, 720); // Taille de la fenêtre
+
         setLocationRelativeTo(null); // Placer la fenêtre au centre de l'écran
         // Initialiser les composants
         // Ajouter les règles du jeu après l'initialisation des composants
-        String reglesJeu = 
-            """
+        String reglesJeu
+                = """
                                                                 
                                                                    Bienvenue dans CPASVERSAILLESICI !
             CPAVERSAILLESICI est un jeu de réflexion dans lequel votre objectif est d’éteindre toutes les lumières d'une grille. 
@@ -54,12 +53,9 @@ public class RegleDuJeu extends JFrame {
         jTextArea1.setEditable(false); // Empêcher l'édition du texte
         jTextArea1.setLineWrap(true); // Activer le retour à la ligne automatique
         jTextArea1.setWrapStyleWord(true); // Le texte se coupe aux espaces pour éviter de couper des mots
-        
+
     }
 
-        
-        
-       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -116,7 +112,7 @@ public class RegleDuJeu extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        EcranAccueil ecranAccueil    = new EcranAccueil();
+        EcranAccueil ecranAccueil = new EcranAccueil();
         ecranAccueil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed

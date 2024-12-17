@@ -1,16 +1,14 @@
 
 public class EcranAccueil extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EcranAccueil
-     */
+    
     public EcranAccueil() {
         initComponents();
         setTitle("Ecran D'Accueil");
         // Centrer la fenêtre au milieu de l'écran
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
         // Définir la taille de la fenêtre
-        setSize(500, 500); 
+        setSize(500, 500);
     }
 
     /**
@@ -121,16 +119,16 @@ public class EcranAccueil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ChoixDiff  s = new ChoixDiff();
+        ChoixDiff s = new ChoixDiff();
         s.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-                                         
-        RegleDuJeu  r = new RegleDuJeu();
+
+        RegleDuJeu r = new RegleDuJeu();
         r.setVisible(true);
-        this.dispose();        
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

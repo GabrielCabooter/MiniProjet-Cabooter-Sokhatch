@@ -13,6 +13,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form FenetrePrincipale
+     *
      * @param nbLignes Nombre de lignes dans la grille
      * @param nbColonnes Nombre de colonnes dans la grille
      */
@@ -20,16 +21,14 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         initComponents(); // Initialise tous les composants de l'interface, y compris jLabel1
         setTitle("CPASVERSAILLESICI!!!");
         setLocationRelativeTo(null);
-        
-        
-        
+
         this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
 
         // Configuration des panneaux
         configureGrillePanel(nbLignes, nbColonnes);
         configureColonneButtons(nbColonnes);
         configureLigneButtons(nbLignes);
-        
+
         // Initialisation du compteur de coups
         nbCoups = 0;
         jLabel2.setText("Coups: " + nbCoups); // Initialisation du texte du JLabel des coups
@@ -37,16 +36,16 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         // Définition du temps en fonction du nombre de colonnes (niveau de difficulté)
         switch (nbColonnes) {
             case 5:
-                tempsRestant = 5 * 60; 
+                tempsRestant = 2 * 60;
                 break;
             case 7:
-                tempsRestant = 3 * 60; 
+                tempsRestant = 1 * 60;
                 break;
             case 10:
-                tempsRestant = 2 * 60; 
+                tempsRestant = 1 * 30;
                 break;
             default:
-                tempsRestant = 5 * 60; 
+                tempsRestant = 5 * 60;
         }
 
         // Création du Timer qui met à jour le temps chaque seconde
@@ -67,7 +66,6 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         this.pack(); // Ajuste la fenêtre à son contenu
     }
 
-
     // Formate le temps restant sous la forme mm:ss
     private String formatTemps(int tempsRestant) {
         int minutes = tempsRestant / 60;
@@ -75,33 +73,28 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         return String.format("%02d:%02d", minutes, secondes);
     }
 
-    
     private void afficherFenetreFin() {
-    FenetreFin fenetreFin = new FenetreFin(nbCoups); 
-    fenetreFin.setVisible(true);
-    dispose();
-}
-    
-    
-    private void verifierVictoire() {
-    if (grille.cellulesToutesEteintes()) {  // Vérifie si toutes les cellules sont éteintes
-        timer.stop();
-        afficherFenetreVictoire();
+        FenetreFin fenetreFin = new FenetreFin(nbCoups);
+        fenetreFin.setVisible(true);
+        dispose();
     }
-}
-    
+
+    private void verifierVictoire() {
+        if (grille.cellulesToutesEteintes()) {  // Vérifie si toutes les cellules sont éteintes
+            timer.stop();
+            afficherFenetreVictoire();
+        }
+    }
+
     private void afficherFenetreVictoire() {
-    FenetreVictoire fenetreVictoire = new FenetreVictoire(nbCoups, tempsRestant); // Passe les deux paramètres
-    fenetreVictoire.setVisible(true); // Affiche la fenêtre de victoire
-    dispose(); // Ferme la fenêtre principale
-}
-    
-    
-    
-    
+        FenetreVictoire fenetreVictoire = new FenetreVictoire(nbCoups, tempsRestant); // Passe les deux paramètres
+        fenetreVictoire.setVisible(true); // Affiche la fenêtre de victoire
+        dispose(); // Ferme la fenêtre principale
+    }
+
     private void configureGrillePanel(int nbLignes, int nbColonnes) {
-    // Déterminer le nombre de mélanges en fonction du nombre de lignes
-    int nbMelanges;
+        // Déterminer le nombre de mélanges en fonction du nombre de lignes
+        int nbMelanges;
         switch (nbLignes) {
             case 5:
                 nbMelanges = 50; // Facile
@@ -117,26 +110,23 @@ public class FenetrePrincipal extends javax.swing.JFrame {
                 break;
         }
 
-    // Configuration du panneau de la grille
-    PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
+        // Configuration du panneau de la grille
+        PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
 
-    // Mélange initial de la grille
-    grille.melangerMatriceAleatoirement(nbMelanges);
+        // Mélange initial de la grille
+        grille.melangerMatriceAleatoirement(nbMelanges);
 
-    // Création des cellules graphiques
-    for (int i = 0; i < nbLignes; i++) {
-        for (int j = 0; j < nbColonnes; j++) {
-            CelluleGraphique boutonCellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
-            PanneauGrille.add(boutonCellule);
+        // Création des cellules graphiques
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                CelluleGraphique boutonCellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
+                PanneauGrille.add(boutonCellule);
+            }
         }
+
+        PanneauGrille.revalidate();
+        PanneauGrille.repaint();
     }
-
-    PanneauGrille.revalidate();
-    PanneauGrille.repaint();
-}
-
-
-
 
     private void configureColonneButtons(int nbColonnes) {
         PanneauBoutonsHorizontaux.removeAll();
@@ -146,7 +136,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
             int colIndex = i;
             btnColonne.addActionListener(evt -> {
                 gererCoup(() -> grille.activerColonneDeCellules(colIndex));
-            
+
             });
             PanneauBoutonsHorizontaux.add(btnColonne);
         }
@@ -154,8 +144,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         PanneauBoutonsHorizontaux.revalidate();
         PanneauBoutonsHorizontaux.repaint();
     }
-    
-    
+
     private void configureLigneButtons(int nbLignes) {
         PanneauBoutonsVerticaux.removeAll();
         PanneauBoutonsVerticaux.setLayout(new GridLayout(nbLignes, 1));
@@ -171,7 +160,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         PanneauBoutonsVerticaux.revalidate();
         PanneauBoutonsVerticaux.repaint();
     }
-    
+
     private void gererCoup(Runnable action) {
         action.run(); // Exécute l'action (ligne, colonne ou diagonale)
         nbCoups++; // Incrémente le compteur de coups
@@ -180,9 +169,6 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         verifierVictoire();
     }
-
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -490,7 +476,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       gererCoup(() -> this.grille.activerLigneDeCellules(2));
+        gererCoup(() -> this.grille.activerLigneDeCellules(2));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -569,25 +555,24 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
-         gererCoup(() -> this.grille.activerDiagonaleDescendante());
+        gererCoup(() -> this.grille.activerDiagonaleDescendante());
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-         gererCoup(() -> this.grille.activerDiagonaleMontante());
+        gererCoup(() -> this.grille.activerDiagonaleMontante());
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-     timer.stop();
-     EcranAccueil ecranAccueil    = new EcranAccueil();
-     ecranAccueil.setVisible(true);
-     this.dispose();   
+        timer.stop();
+        EcranAccueil ecranAccueil = new EcranAccueil();
+        ecranAccueil.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton23ActionPerformed
 
-    
     private FenetrePrincipal() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    } 
-    
+    }
+
     /**
      * @param args the command line arguments
      */

@@ -1,17 +1,14 @@
 
 public class FenetreFin extends javax.swing.JFrame {
 
-  
     public FenetreFin(int nbCoups) {
         initComponents();
-    setTitle("Fin de la Partie");
-    setSize(500, 500);
-    setLocationRelativeTo(null);
-        
+        setTitle("Fin de la Partie");
+        setSize(500, 500);
+        setLocationRelativeTo(null);
+
         jLabel1.setText("Temps écoulé ! Vous avez joué " + nbCoups + " coups.");
     }
-
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,17 +109,17 @@ public class FenetreFin extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         System.exit(0); // Ferme l'application
     }//GEN-LAST:event_jButton3ActionPerformed
-  
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ChoixDiff choixDiff    = new ChoixDiff();
+        ChoixDiff choixDiff = new ChoixDiff();
         choixDiff.setVisible(true);
-        this.dispose();   
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        EcranAccueil ecranAccueil    = new EcranAccueil();
+        EcranAccueil ecranAccueil = new EcranAccueil();
         ecranAccueil.setVisible(true);
-        this.dispose();       
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -160,7 +157,8 @@ public class FenetreFin extends javax.swing.JFrame {
             }
         });
     }
-private FenetreFin() {
+
+    private FenetreFin() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

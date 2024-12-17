@@ -4,15 +4,7 @@ import java.awt.Graphics;
 import javax.swing.JButton;
 import miniprojet.CelluleLumineuse;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
-/**
- *
- * 
- */
 public class CelluleGraphique extends JButton {
 
     int largeur; // largeur en pixel de la cellule 
@@ -50,7 +42,7 @@ public class CelluleGraphique extends JButton {
         // Applique la couleur de fond en fonction de l'état de la cellule
         if (celluleLumineuseAssociee.estEteint()) {
             setBackground(COULEUR_ETEINTE); // Gris pour les cellules éteintes
-        } else {           
+        } else {
             setBackground(COULEUR_ALLUMEE); // Jaune pour les cellules allumées
         }
 

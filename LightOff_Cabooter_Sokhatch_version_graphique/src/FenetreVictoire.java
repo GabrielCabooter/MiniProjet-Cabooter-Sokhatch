@@ -1,32 +1,24 @@
 
-
-
 public class FenetreVictoire extends javax.swing.JFrame {
 
     public FenetreVictoire(int nbCoups, int tempsRestant) {
-    initComponents();
-    setTitle("Victoire !");
-    setLocationRelativeTo(null);
-    setSize(500, 530);
-    
-    
-    // Affiche le nombre de coups et le temps restant dans la fenêtre
-    jLabel2.setText("Nombre de coups : " + nbCoups);
-    jLabel3.setText("Temps restant : " + formatTemps(tempsRestant));
-    
-   
+        initComponents();
+        setTitle("Victoire !");
+        setLocationRelativeTo(null);
+        setSize(500, 530);
+
+        // Affiche le nombre de coups et le temps restant dans la fenêtre
+        jLabel2.setText("Nombre de coups : " + nbCoups);
+        jLabel3.setText("Temps restant : " + formatTemps(tempsRestant));
+
     }
 
-    
-    
 // Méthode pour formater le temps sous forme mm:ss
-private String formatTemps(int tempsRestant) {
-    int minutes = tempsRestant / 60;
-    int secondes = tempsRestant % 60;
-    return String.format("%02d:%02d", minutes, secondes);
-}
-
-   
+    private String formatTemps(int tempsRestant) {
+        int minutes = tempsRestant / 60;
+        int secondes = tempsRestant % 60;
+        return String.format("%02d:%02d", minutes, secondes);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,13 +140,13 @@ private String formatTemps(int tempsRestant) {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ChoixDiff choixDiff    = new ChoixDiff();
+        ChoixDiff choixDiff = new ChoixDiff();
         choixDiff.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        EcranAccueil ecranAccueil    = new EcranAccueil();
+        EcranAccueil ecranAccueil = new EcranAccueil();
         ecranAccueil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -193,10 +185,11 @@ private String formatTemps(int tempsRestant) {
             }
         });
     }
-    
+
     private FenetreVictoire() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     FenetreVictoire(int nbCoups) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

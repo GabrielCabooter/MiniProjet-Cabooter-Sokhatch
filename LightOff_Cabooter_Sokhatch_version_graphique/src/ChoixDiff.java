@@ -13,13 +13,14 @@ public class ChoixDiff extends javax.swing.JFrame {
      * Creates new form ChoixDiff
      */
     public ChoixDiff() {
-        initComponents(); 
+        initComponents();
         setTitle("Choix Difficulté");
-        
-        setSize(500,530); // Taille de la fenêtre
-        
+
+        setSize(500, 530); // Taille de la fenêtre
+
         setLocationRelativeTo(null); // Placer la fenêtre au centre de l'écran
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,23 +118,23 @@ public class ChoixDiff extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    FenetrePrincipal fenetre = new FenetrePrincipal(5, 5);
-    fenetre.setVisible(true);
-    this.dispose(); // Ferme la fenêtre actuelle        // TODO add your handling code here:
+        FenetrePrincipal fenetre = new FenetrePrincipal(5, 5);
+        fenetre.setVisible(true);
+        this.dispose(); // Ferme la fenêtre actuelle        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    // Intermédiaire : 7x7
-    FenetrePrincipal fenetre = new FenetrePrincipal(7, 7);
-    fenetre.setVisible(true);
-    this.dispose(); // Ferme la fenêtre actuelle    // TODO add your handling code here:
+        // Intermédiaire : 7x7
+        FenetrePrincipal fenetre = new FenetrePrincipal(7, 7);
+        fenetre.setVisible(true);
+        this.dispose(); // Ferme la fenêtre actuelle    // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    // Difficile : 10x10
-    FenetrePrincipal fenetre = new FenetrePrincipal(10, 10);
-    fenetre.setVisible(true);
-    this.dispose(); // Ferme la fenêtre actuelle    // TODO add your handling code here:
+        // Difficile : 10x10
+        FenetrePrincipal fenetre = new FenetrePrincipal(10, 10);
+        fenetre.setVisible(true);
+        this.dispose(); // Ferme la fenêtre actuelle    // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
