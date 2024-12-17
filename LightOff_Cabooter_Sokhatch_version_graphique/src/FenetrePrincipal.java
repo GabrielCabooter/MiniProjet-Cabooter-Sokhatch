@@ -34,16 +34,16 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         // Définition du temps en fonction du nombre de colonnes (niveau de difficulté)
         switch (nbColonnes) {
             case 5:
-                tempsRestant = 2 * 60; // 2 minutes
+                tempsRestant = 5 * 60; 
                 break;
             case 7:
-                tempsRestant = 3 * 60; // 3 minutes
+                tempsRestant = 3 * 60; 
                 break;
             case 10:
-                tempsRestant = 5 * 60; // 5 minutes
+                tempsRestant = 2 * 60; 
                 break;
             default:
-                tempsRestant = 2 * 60; // Par défaut, 2 minutes
+                tempsRestant = 5 * 60; 
         }
 
         // Création du Timer qui met à jour le temps chaque seconde
@@ -74,20 +74,15 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
     
     private void afficherFenetreFin() {
-        // Crée une nouvelle fenêtre de fin (FenetreFin)
-        FenetreFin fenetreFin = new FenetreFin();
-        
-        // Affiche la fenêtre de fin
-        fenetreFin.setVisible(true);
-        
-        // Ferme la fenêtre actuelle
-        dispose();
-    }
+    FenetreFin fenetreFin = new FenetreFin(nbCoups); 
+    fenetreFin.setVisible(true);
+    dispose();
+}
     
     
     private void verifierVictoire() {
     if (grille.cellulesToutesEteintes()) {  // Vérifie si toutes les cellules sont éteintes
-        // Si toutes les cellules sont éteintes, afficher une fenêtre de victoire
+        timer.stop();
         afficherFenetreVictoire();
     }
 }
@@ -178,7 +173,6 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanneauGrille = new javax.swing.JPanel();
         PanneauBoutonsVerticaux = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -204,28 +198,17 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         PanneauBoutonsDiagonales = new javax.swing.JPanel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        PanneauTimer = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        PanneauGrille = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        PanneauTimer = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton23 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 102, 102));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        PanneauGrille.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout PanneauGrilleLayout = new javax.swing.GroupLayout(PanneauGrille);
-        PanneauGrille.setLayout(PanneauGrilleLayout);
-        PanneauGrilleLayout.setHorizontalGroup(
-            PanneauGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
-        );
-        PanneauGrilleLayout.setVerticalGroup(
-            PanneauGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 510, 500));
 
         PanneauBoutonsVerticaux.setBackground(new java.awt.Color(204, 204, 204));
         PanneauBoutonsVerticaux.setLayout(new java.awt.GridLayout(10, 1));
@@ -416,19 +399,26 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         getContentPane().add(PanneauBoutonsDiagonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 570, 230, 50));
 
-        PanneauTimer.setBackground(new java.awt.Color(51, 255, 51));
-        PanneauTimer.setLayout(new java.awt.GridLayout(1, 1));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Timer");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        PanneauTimer.add(jLabel1);
+        PanneauGrille.setBackground(new java.awt.Color(255, 255, 255));
 
-        getContentPane().add(PanneauTimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 220, 70));
+        javax.swing.GroupLayout PanneauGrilleLayout = new javax.swing.GroupLayout(PanneauGrille);
+        PanneauGrille.setLayout(PanneauGrilleLayout);
+        PanneauGrilleLayout.setHorizontalGroup(
+            PanneauGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 510, Short.MAX_VALUE)
+        );
+        PanneauGrilleLayout.setVerticalGroup(
+            PanneauGrilleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
 
-        jPanel1.setBackground(new java.awt.Color(102, 255, 102));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(PanneauGrille);
+        PanneauGrille.setBounds(140, 60, 510, 500);
+
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new java.awt.GridLayout(1, 1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -436,7 +426,32 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jLabel2.setText("nbCoups");
         jPanel1.add(jLabel2);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, 220, 70));
+        jPanel2.add(jPanel1);
+        jPanel1.setBounds(710, 280, 220, 70);
+
+        PanneauTimer.setBackground(new java.awt.Color(0, 153, 153));
+        PanneauTimer.setLayout(new java.awt.GridLayout(1, 1));
+
+        jLabel1.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Timer");
+        PanneauTimer.add(jLabel1);
+
+        jPanel2.add(PanneauTimer);
+        PanneauTimer.setBounds(710, 190, 220, 70);
+
+        jButton23.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jButton23.setText("Revenir au Menu");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton23);
+        jButton23.setBounds(700, 390, 240, 60);
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 670));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -540,6 +555,12 @@ public class FenetrePrincipal extends javax.swing.JFrame {
          gererCoup(() -> this.grille.activerDiagonaleMontante());
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+     EcranAccueil ecranAccueil    = new EcranAccueil();
+     ecranAccueil.setVisible(true);
+     this.dispose();   
+    }//GEN-LAST:event_jButton23ActionPerformed
+
     
     private FenetrePrincipal() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -601,6 +622,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -611,5 +633,6 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
