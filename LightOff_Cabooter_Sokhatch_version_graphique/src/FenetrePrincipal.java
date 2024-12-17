@@ -51,7 +51,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         // Création du Timer qui met à jour le temps chaque seconde
         timer = new Timer(1000, e -> {
             tempsRestant--; // Décrémente le temps restant
-            jLabel1.setText("Timer: " + formatTemps(tempsRestant)); // Met à jour le texte de jLabel1
+            jLabel1.setText("Timer  " + formatTemps(tempsRestant)); // Met à jour le texte de jLabel1
 
             // Si le temps est écoulé, arrête le jeu et affiche une fenêtre de fin
             if (tempsRestant <= 0) {
@@ -90,14 +90,9 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 }
     
     private void afficherFenetreVictoire() {
-    // Crée une nouvelle fenêtre de victoire (FenetreVictoire)
-    FenetreVictoire fenetreVictoire = new FenetreVictoire(nbCoups); // Passe le nombre de coups en paramètre
-
-    // Affiche la fenêtre de victoire
-    fenetreVictoire.setVisible(true);
-
-    // Ferme la fenêtre actuelle (FenetrePrincipal)
-    dispose();
+    FenetreVictoire fenetreVictoire = new FenetreVictoire(nbCoups, tempsRestant); // Passe les deux paramètres
+    fenetreVictoire.setVisible(true); // Affiche la fenêtre de victoire
+    dispose(); // Ferme la fenêtre principale
 }
     
     
@@ -438,10 +433,11 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Timer");
+        jLabel1.setPreferredSize(new java.awt.Dimension(120, 50));
         PanneauTimer.add(jLabel1);
 
         jPanel2.add(PanneauTimer);
-        PanneauTimer.setBounds(710, 140, 220, 70);
+        PanneauTimer.setBounds(690, 140, 260, 70);
 
         jButton23.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         jButton23.setText("Menu");
