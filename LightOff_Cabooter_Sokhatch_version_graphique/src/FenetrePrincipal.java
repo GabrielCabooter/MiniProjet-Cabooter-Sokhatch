@@ -1,7 +1,6 @@
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import miniprojet.GrilleDeCellules;
 
@@ -46,13 +45,12 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         // Création du Timer qui met à jour le temps chaque seconde
         timer = new Timer(1000, e -> {
             tempsRestant--; // Décrémente le temps restant
-            jLabel1.setText("Temps restant: " + formatTemps(tempsRestant)); // Met à jour le texte de jLabel1
+            jLabel1.setText("Timer: " + formatTemps(tempsRestant)); // Met à jour le texte de jLabel1
 
-            // Si le temps est écoulé, arrête le jeu et affiche une fenêtre de défaite
+            // Si le temps est écoulé, arrête le jeu et affiche une fenêtre de fin
             if (tempsRestant <= 0) {
                 timer.stop(); // Arrête le timer
-                JOptionPane.showMessageDialog(this, "Temps écoulé! Vous avez perdu.");
-                desactiverBoutons(); // Désactive tous les boutons
+                afficherFenetreFin(); // Affiche la fenêtre de fin
             }
         });
 
@@ -62,6 +60,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         this.pack(); // Ajuste la fenêtre à son contenu
     }
 
+
     // Formate le temps restant sous la forme mm:ss
     private String formatTemps(int tempsRestant) {
         int minutes = tempsRestant / 60;
@@ -70,15 +69,38 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }
 
     
-    
-    
-
-    private FenetrePrincipal() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private void afficherFenetreFin() {
+        // Crée une nouvelle fenêtre de fin (FenetreFin)
+        FenetreFin fenetreFin = new FenetreFin();
+        
+        // Affiche la fenêtre de fin
+        fenetreFin.setVisible(true);
+        
+        // Ferme la fenêtre actuelle
+        dispose();
     }
+    
+    
+    private void verifierVictoire() {
+    if (grille.cellulesToutesEteintes()) {  // Vérifie si toutes les cellules sont éteintes
+        // Si toutes les cellules sont éteintes, afficher une fenêtre de victoire
+        afficherFenetreVictoire();
+    }
+}
+    
+    private void afficherFenetreVictoire() {
+    // Crée une nouvelle fenêtre de victoire (FenetreVictoire)
+    FenetreVictoire fenetreVictoire = new FenetreVictoire(nbCoups); // Passe le nombre de coups en paramètre
 
-  
+    // Affiche la fenêtre de victoire
+    fenetreVictoire.setVisible(true);
 
+    // Ferme la fenêtre actuelle (FenetrePrincipal)
+    dispose();
+}
+    
+    
+    
     
     private void configureGrillePanel(int nbLignes, int nbColonnes) {
         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
@@ -105,6 +127,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
             int colIndex = i;
             btnColonne.addActionListener(evt -> {
                 gererCoup(() -> grille.activerColonneDeCellules(colIndex));
+            
             });
             PanneauBoutonsHorizontaux.add(btnColonne);
         }
@@ -135,30 +158,10 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         nbCoups++; // Incrémente le compteur de coups
         repaint(); // Redessine la grille
 
-        if (grille.cellulesToutesEteintes()) {
-            // Si la grille est éteinte, affiche un message de victoire
-            JOptionPane.showMessageDialog(this, "Félicitations, vous avez gagné en " + nbCoups + " coups !");
-            desactiverBoutons(); // Désactive tous les boutons
-        }
+        verifierVictoire();
     }
 
-    private void desactiverBoutons() {
-        for (java.awt.Component component : PanneauBoutonsVerticaux.getComponents()) {
-            if (component instanceof javax.swing.JButton) {
-                component.setEnabled(false);
-            }
-        }
-        for (java.awt.Component component : PanneauBoutonsHorizontaux.getComponents()) {
-            if (component instanceof javax.swing.JButton) {
-                component.setEnabled(false);
-            }
-        }
-        for (java.awt.Component component : PanneauBoutonsDiagonales.getComponents()) {
-            if (component instanceof javax.swing.JButton) {
-                component.setEnabled(false);
-            }
-        }
-    }
+    
     
 
     /**
@@ -196,8 +199,9 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         PanneauBoutonsDiagonales = new javax.swing.JPanel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        PanneauTimer = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -406,12 +410,20 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         getContentPane().add(PanneauBoutonsDiagonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 570, 230, 50));
 
-        jPanel1.setBackground(new java.awt.Color(51, 255, 51));
-        jPanel1.setLayout(new java.awt.GridLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, -1, -1));
+        PanneauTimer.setBackground(new java.awt.Color(51, 255, 51));
+        PanneauTimer.setLayout(new java.awt.GridLayout(1, 1));
 
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 130, 120, 60));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Timer");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PanneauTimer.add(jLabel1);
+
+        getContentPane().add(PanneauTimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 220, 70));
+
+        jPanel1.setBackground(new java.awt.Color(102, 255, 102));
+        jPanel1.setLayout(new java.awt.GridLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, 130, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -515,6 +527,11 @@ public class FenetrePrincipal extends javax.swing.JFrame {
          gererCoup(() -> this.grille.activerDiagonaleMontante());
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    
+    private FenetrePrincipal() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    } 
+    
     /**
      * @param args the command line arguments
      */
@@ -555,6 +572,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel PanneauBoutonsHorizontaux;
     private javax.swing.JPanel PanneauBoutonsVerticaux;
     private javax.swing.JPanel PanneauGrille;
+    private javax.swing.JPanel PanneauTimer;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
