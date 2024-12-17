@@ -18,8 +18,10 @@ public class FenetrePrincipal extends javax.swing.JFrame {
      */
     public FenetrePrincipal(int nbLignes, int nbColonnes) {
         initComponents(); // Initialise tous les composants de l'interface, y compris jLabel1
-
-        // Initialisation de la grille avant son utilisation
+        setTitle("CPASVERSAILLESICI!!!");
+        setLocationRelativeTo(null);  
+        
+        
         this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
 
         // Configuration des panneaux
@@ -34,7 +36,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         // Définition du temps en fonction du nombre de colonnes (niveau de difficulté)
         switch (nbColonnes) {
             case 5:
-                tempsRestant = 5 * 60; 
+                tempsRestant = 5 * 1; 
                 break;
             case 7:
                 tempsRestant = 3 * 60; 
@@ -421,28 +423,28 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new java.awt.GridLayout(1, 1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("nbCoups");
         jPanel1.add(jLabel2);
 
         jPanel2.add(jPanel1);
-        jPanel1.setBounds(710, 280, 220, 70);
+        jPanel1.setBounds(710, 260, 220, 70);
 
         PanneauTimer.setBackground(new java.awt.Color(0, 153, 153));
         PanneauTimer.setLayout(new java.awt.GridLayout(1, 1));
 
         jLabel1.setBackground(new java.awt.Color(0, 102, 102));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Timer");
         PanneauTimer.add(jLabel1);
 
         jPanel2.add(PanneauTimer);
-        PanneauTimer.setBounds(710, 190, 220, 70);
+        PanneauTimer.setBounds(710, 140, 220, 70);
 
-        jButton23.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jButton23.setText("Revenir au Menu");
+        jButton23.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        jButton23.setText("Menu");
         jButton23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton23ActionPerformed(evt);
@@ -556,6 +558,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+     timer.stop();
      EcranAccueil ecranAccueil    = new EcranAccueil();
      ecranAccueil.setVisible(true);
      this.dispose();   
