@@ -2,20 +2,15 @@
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import miniprojet.GrilleDeCellules;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-/**
- *
- *
- */
 public class FenetrePrincipal extends javax.swing.JFrame {
 
     private GrilleDeCellules grille;
     private int nbCoups;
+    private int tempsEcoule; // Variable pour suivre le temps écoulé
+    private Timer timer; // Le Timer pour mettre à jour le temps
 
     /**
      * Creates new form FenetrePrincipale
@@ -23,15 +18,31 @@ public class FenetrePrincipal extends javax.swing.JFrame {
      * @param nbColonnes Nombre de colonnes dans la grille
      */
     public FenetrePrincipal(int nbLignes, int nbColonnes) {
-        initComponents();
-        this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
+    initComponents(); // Cette ligne initialise tous les composants de l'interface, y compris jLabel1
 
-         // Configuration des panneaux
-        configureGrillePanel(nbLignes, nbColonnes);
-        configureColonneButtons(nbColonnes);
-        configureLigneButtons(nbLignes);
-        this.pack(); // Ajuste la fenêtre à son contenu
+    // Initialisation du temps écoulé
+    tempsEcoule = 0;
+
+    // Initialisation de la grille avant son utilisation
+    this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
+
+    // Configuration des panneaux
+    configureGrillePanel(nbLignes, nbColonnes);
+    configureColonneButtons(nbColonnes);
+    configureLigneButtons(nbLignes);
+
+    // Création du Timer qui met à jour le temps toutes les secondes
+    timer = new Timer(1000, e -> {
+        tempsEcoule++; // Incrémente le temps écoulé
+        jLabel1.setText("Temps: " + tempsEcoule + " s"); // Met à jour le texte de jLabel1
+    });
+
+    // Démarrer le Timer
+    timer.start();
+
+    this.pack(); // Ajuste la fenêtre à son contenu
     }
+
 
     private FenetrePrincipal() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -88,14 +99,6 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         PanneauBoutonsVerticaux.revalidate();
         PanneauBoutonsVerticaux.repaint();
-    }
-
-
-   
-    public void initialiserPartie() {
-        grille.eteindreToutesLesCellules(); // Éteint toutes les cellules au début
-        grille.melangerMatriceAleatoirement(10); // Mélange la grille
-        nbCoups = 0; // Réinitialise le compteur de coups
     }
     
     private void gererCoup(Runnable action) {
@@ -164,6 +167,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         PanneauBoutonsDiagonales = new javax.swing.JPanel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -372,6 +377,13 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         getContentPane().add(PanneauBoutonsDiagonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 570, 230, 50));
 
+        jPanel1.setBackground(new java.awt.Color(51, 255, 51));
+        jPanel1.setLayout(new java.awt.GridLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, -1, -1));
+
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 130, 120, 60));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -536,5 +548,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
