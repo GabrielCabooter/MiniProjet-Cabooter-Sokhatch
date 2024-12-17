@@ -7,7 +7,8 @@ public class FenetreVictoire extends javax.swing.JFrame {
     initComponents();
     setTitle("Victoire !");
     setLocationRelativeTo(null);
-   
+    setSize(500, 530);
+    
     
     // Affiche le nombre de coups et le temps restant dans la fenêtre
     jLabel2.setText("Nombre de coups : " + nbCoups);

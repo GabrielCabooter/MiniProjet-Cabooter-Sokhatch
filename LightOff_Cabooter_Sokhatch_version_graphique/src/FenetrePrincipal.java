@@ -19,7 +19,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     public FenetrePrincipal(int nbLignes, int nbColonnes) {
         initComponents(); // Initialise tous les composants de l'interface, y compris jLabel1
         setTitle("CPASVERSAILLESICI!!!");
-        setLocationRelativeTo(null);  
+        setLocationRelativeTo(null);
+        
         
         
         this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
@@ -36,7 +37,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         // Définition du temps en fonction du nombre de colonnes (niveau de difficulté)
         switch (nbColonnes) {
             case 5:
-                tempsRestant = 5 * 1; 
+                tempsRestant = 5 * 60; 
                 break;
             case 7:
                 tempsRestant = 3 * 60; 
@@ -99,19 +100,41 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     
     
     private void configureGrillePanel(int nbLignes, int nbColonnes) {
-        PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
-        grille.melangerMatriceAleatoirement(10); // Mélange initial de la grille
-
-        for (int i = 0; i < nbLignes; i++) {
-            for (int j = 0; j < nbColonnes; j++) {
-                CelluleGraphique boutonCellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
-                PanneauGrille.add(boutonCellule);
-            }
+    // Déterminer le nombre de mélanges en fonction du nombre de lignes
+    int nbMelanges;
+        switch (nbLignes) {
+            case 5:
+                nbMelanges = 50; // Facile
+                break;
+            case 7:
+                nbMelanges = 100; // Moyen
+                break;
+            case 10:
+                nbMelanges = 200; // Difficile
+                break;
+            default:
+                nbMelanges = 10; // Valeur par défaut si autre taille
+                break;
         }
 
-        PanneauGrille.revalidate();
-        PanneauGrille.repaint();
+    // Configuration du panneau de la grille
+    PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
+
+    // Mélange initial de la grille
+    grille.melangerMatriceAleatoirement(nbMelanges);
+
+    // Création des cellules graphiques
+    for (int i = 0; i < nbLignes; i++) {
+        for (int j = 0; j < nbColonnes; j++) {
+            CelluleGraphique boutonCellule = new CelluleGraphique(grille.matriceCellules[i][j], 36, 36);
+            PanneauGrille.add(boutonCellule);
+        }
     }
+
+    PanneauGrille.revalidate();
+    PanneauGrille.repaint();
+}
+
 
 
 
