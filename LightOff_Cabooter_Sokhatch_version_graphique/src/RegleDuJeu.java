@@ -53,9 +53,9 @@ public class RegleDuJeu extends JFrame {
             
                                                                     3. Niveaux de difficulté :
             
-                                                  - **Facile** : Grille de 5x5 et 5 minutes pour résoudre.
-                                           - **Moyen** : Grille de 7x7 et 3 minutes pour résoudre.
-                                             - **Difficile** : Grille de 10x10 et 2 minutes pour résoudre.
+                                                  - **Facile** : Grille de 5x5 et 2 minutes pour résoudre.
+                                           - **Moyen** : Grille de 7x7 et 1 minutes pour résoudre.
+                                             - **Difficile** : Grille de 10x10 et 30secondes pour résoudre.
             
                                                                         A VOUS DE JOUER
             """;
