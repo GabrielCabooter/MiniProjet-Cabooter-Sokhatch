@@ -1,14 +1,17 @@
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.ArrayList;
 import java.util.List;
 
-public class FenetreVictoire extends JFrame {
+public class FenetreVictoire extends javax.swing.JFrame {
     private List<Score> scores;
+    private DefaultTableModel tableModel;  // Déclaration du modèle de table
 
     public FenetreVictoire(int nbCoups, int tempsRestant, int nbLignes) {
-        scores = new ArrayList<>();
+        // Initialisation des composants de la fenêtre (appelé par NetBeans)
+        initComponents();
+        
+        scores = ScoreManager.chargerScores();  // Charge les scores précédents depuis le fichier
         setTitle("Victoire !");
         setSize(600, 600);
         setLocationRelativeTo(null);
@@ -17,32 +20,37 @@ public class FenetreVictoire extends JFrame {
         // Déterminer la difficulté en fonction de nbLignes
         String difficulte = determinerDifficulte(nbLignes);
 
-        // Initialise les composants générés par NetBeans
-        initComponents();
-
         // Enregistre le score
         enregistrerScore(nbCoups, tempsRestant, difficulte);
 
-        // Met à jour le tableau avec les scores
+        // Sauvegarde les scores dans le fichier
+        ScoreManager.sauvegarderScores(scores);
+
+        // Initialiser le modèle de table et mettre à jour le tableau
+        initialiserTableModel();
         mettreAJourTableau();
     }
 
-    // Méthode pour déterminer la difficulté
-    private String determinerDifficulte(int nbLignes) {
-        if (nbLignes == 5) return "Facile";
-        if (nbLignes == 7) return "Moyen";
-        if (nbLignes == 10) return "Difficile";
-        return "Inconnu";
-    }
-
-    // Formate le temps sous forme mm:ss
+    // Méthode pour formater le temps sous forme mm:ss
     private String formatTemps(int tempsRestant) {
         int minutes = tempsRestant / 60;
         int secondes = tempsRestant % 60;
         return String.format("%02d:%02d", minutes, secondes);
     }
 
-    // Enregistre un nouveau score
+    // Méthode pour déterminer la difficulté en fonction du nombre de lignes
+    private String determinerDifficulte(int nbLignes) {
+        switch (nbLignes) {
+            case 5:
+                return "Facile";
+            case 7:
+                return "Moyenne";
+            default:
+                return "Difficile";
+        }
+    }
+
+    // Méthode pour enregistrer un score
     private void enregistrerScore(int nbCoups, int tempsRestant, String difficulte) {
         String joueur = JOptionPane.showInputDialog(this, "Entrez votre nom :", "Nom du joueur", JOptionPane.QUESTION_MESSAGE);
         if (joueur == null || joueur.isBlank()) {
@@ -53,23 +61,26 @@ public class FenetreVictoire extends JFrame {
         scores.sort((s1, s2) -> Integer.compare(s2.getScore(), s1.getScore())); // Tri décroissant des scores
     }
 
-    // Met à jour la JTable avec les scores
-    private void mettreAJourTableau() {
-        // Récupère le modèle de la table jTable1
-        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-        tableModel.setRowCount(0); // Vide les lignes existantes
+    // Méthode pour initialiser le modèle de la table
+    private void initialiserTableModel() {
+        // Créez un modèle de table avec les colonnes appropriées
+        tableModel = new DefaultTableModel(new Object[]{"Joueur", "Coups", "Temps", "Difficulté", "Score"}, 0);
+        jTable1.setModel(tableModel);  // Assignez le modèle de table à votre jTable1
+    }
 
-        // Ajoute les scores au modèle
+    // Méthode pour mettre à jour le tableau des scores
+    private void mettreAJourTableau() {
+        tableModel.setRowCount(0);  // Réinitialise le tableau
         for (Score score : scores) {
-            tableModel.addRow(new Object[]{
-                score.getJoueur(),
-                score.getNbCoups(),
-                formatTemps(score.getTempsRestant()),
-                score.getDifficulte(),
-                score.getScore()
-            });
+            tableModel.addRow(new Object[]{score.getJoueur(), score.getNbCoups(), formatTemps(score.getTempsRestant()), score.getDifficulte(), score.getScore()});
         }
     }
+    // Ajoutez la méthode initComponents() générée par NetBeans
+    // Code généré par NetBeans pour initialiser tous les composants graphiques de la fenêtre
+
+
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -250,9 +261,7 @@ public class FenetreVictoire extends JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    FenetreVictoire(int nbCoups) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
@@ -264,3 +273,4 @@ public class FenetreVictoire extends JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+    

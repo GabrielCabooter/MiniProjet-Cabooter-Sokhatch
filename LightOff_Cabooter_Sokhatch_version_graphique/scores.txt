@@ -1,0 +1,6 @@
+gg,4,118,Facile,1160
+dd,4,117,Facile,1150
+gg,6,117,Facile,1140
+jj,6,117,Facile,1140
+gg,4,115,Facile,1130
+gg,22,105,Facile,940
