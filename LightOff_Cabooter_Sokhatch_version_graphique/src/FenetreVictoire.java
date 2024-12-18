@@ -6,6 +6,7 @@ import java.util.List;
 public class FenetreVictoire extends javax.swing.JFrame {
     private List<Score> scores;
     private DefaultTableModel tableModel;  // Déclaration du modèle de table
+    private int tempsInitial;  // Variable pour stocker le temps initial en fonction de la difficulté
 
     public FenetreVictoire(int nbCoups, int tempsRestant, int nbLignes) {
         // Initialisation des composants de la fenêtre (appelé par NetBeans)
@@ -17,8 +18,11 @@ public class FenetreVictoire extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Déterminer la difficulté en fonction de nbLignes
+        
+        // Déterminer la difficulté et initialiser le temps
         String difficulte = determinerDifficulte(nbLignes);
+        initialiserTemps(difficulte);
+        
 
         // Enregistre le score
         enregistrerScore(nbCoups, tempsRestant, difficulte);
@@ -31,12 +35,7 @@ public class FenetreVictoire extends javax.swing.JFrame {
         mettreAJourTableau();
     }
 
-    // Méthode pour formater le temps sous forme mm:ss
-    private String formatTemps(int tempsRestant) {
-        int minutes = tempsRestant / 60;
-        int secondes = tempsRestant % 60;
-        return String.format("%02d:%02d", minutes, secondes);
-    }
+ 
 
     // Méthode pour déterminer la difficulté en fonction du nombre de lignes
     private String determinerDifficulte(int nbLignes) {
@@ -50,6 +49,32 @@ public class FenetreVictoire extends javax.swing.JFrame {
         }
     }
 
+    // Méthode pour initialiser le temps en fonction de la difficulté
+    private void initialiserTemps(String difficulte) {
+        switch (difficulte) {
+            case "Facile":
+                tempsInitial = 2 * 60;  // 2 minutes pour la difficulté Facile
+                break;
+            case "Moyenne":
+                tempsInitial = 1 * 60;  // 1 minute pour la difficulté Moyenne
+                break;
+            case "Difficile":
+                tempsInitial = 30;  // 30 secondes pour la difficulté Difficile
+                break;
+            default:
+                tempsInitial = 0;  // Valeur par défaut
+        }
+    }
+
+    // Méthode pour transformer le temps restant en temps joué
+    private String formatTempsJoue(int tempsRestant) {
+        // Le temps joué est la différence entre le temps initial et le temps restant
+        int tempsJoue = tempsInitial - tempsRestant;
+        int minutes = tempsJoue / 60;
+        int secondes = tempsJoue % 60;
+        return String.format("%02d:%02d", minutes, secondes);
+    }
+
     // Méthode pour enregistrer un score
     private void enregistrerScore(int nbCoups, int tempsRestant, String difficulte) {
         String joueur = JOptionPane.showInputDialog(this, "Entrez votre nom :", "Nom du joueur", JOptionPane.QUESTION_MESSAGE);
@@ -58,13 +83,13 @@ public class FenetreVictoire extends javax.swing.JFrame {
         }
         Score score = new Score(joueur, nbCoups, tempsRestant, difficulte);
         scores.add(score);
-        scores.sort((s1, s2) -> Integer.compare(s2.getScore(), s1.getScore())); // Tri décroissant des scores
+        scores.sort((s1, s2) -> Integer.compare(s1.getScore(), s2.getScore())); // Tri croissant des scores
     }
 
     // Méthode pour initialiser le modèle de la table
     private void initialiserTableModel() {
         // Créez un modèle de table avec les colonnes appropriées
-        tableModel = new DefaultTableModel(new Object[]{"Joueur", "Coups", "Temps", "Difficulté", "Score"}, 0);
+        tableModel = new DefaultTableModel(new Object[]{"Joueur", "Coups", "Temps Joué", "Difficulté", "Score"}, 0);
         jTable1.setModel(tableModel);  // Assignez le modèle de table à votre jTable1
     }
 
@@ -72,14 +97,19 @@ public class FenetreVictoire extends javax.swing.JFrame {
     private void mettreAJourTableau() {
         tableModel.setRowCount(0);  // Réinitialise le tableau
         for (Score score : scores) {
-            tableModel.addRow(new Object[]{score.getJoueur(), score.getNbCoups(), formatTemps(score.getTempsRestant()), score.getDifficulte(), score.getScore()});
+            // Calculez le temps joué
+            String tempsJoue = formatTempsJoue(score.getTempsRestant());
+            
+            tableModel.addRow(new Object[]{
+                score.getJoueur(),
+                score.getNbCoups(),
+                tempsJoue,  // Affichage du temps joué
+                score.getDifficulte(),
+                score.getScore()
+            });
         }
     }
-    // Ajoutez la méthode initComponents() générée par NetBeans
-    // Code généré par NetBeans pour initialiser tous les composants graphiques de la fenêtre
-
-
-
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -207,7 +237,9 @@ public class FenetreVictoire extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        System.exit(0); // Ferme l'application
+
+        ScoreManager.reinitialiserScores(); // Réinitialisation des scores
+           System.exit(0); // Ferme l'application
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

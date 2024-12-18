@@ -4,6 +4,7 @@ import java.util.*;
 
 public class ScoreManager {
     private static final String FILE_NAME = "scores.txt";  // Fichier pour stocker les scores
+    private static List<Score> scores = new ArrayList<>(); // Liste des scores en mémoire
 
     // Sauvegarde des scores dans un fichier texte
     public static void sauvegarderScores(List<Score> scores) {
@@ -39,5 +40,18 @@ public class ScoreManager {
             e.printStackTrace();
         }
         return scores;
+    }
+
+    // Méthode pour réinitialiser les scores en mémoire et le fichier
+    public static void reinitialiserScores() {
+        // Vider la liste des scores en mémoire
+        scores.clear();
+
+        // Optionnel : Vider le fichier de scores
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            writer.write("");  // Écrire une chaîne vide pour réinitialiser le fichier
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
