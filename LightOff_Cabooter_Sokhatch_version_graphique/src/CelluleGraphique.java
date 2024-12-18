@@ -1,6 +1,6 @@
 /**
  * Nom du projet : CPASVERSAILLESICI
- * Auteurs : Gabriel Cabooter et Arthur Sohkatch
+ * Auteurs : Gabriel Cabooter et Arthur Sokhatch
  * Date du projet : Du 20 novembre 2024 au 18 décembre 2024
  */
 
