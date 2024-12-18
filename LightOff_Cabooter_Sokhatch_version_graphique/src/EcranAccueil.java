@@ -1,6 +1,6 @@
 /**
  * Nom du projet : CPASVERSILLESICI
- * Auteurs : Gabriel Cabooter et Arthur Sohkatch
+ * Auteurs : Gabriel Cabooter et Arthur Sokhatch
  * Date du projet : Du 20 novembre 2024 au 18 décembre 2024
  * 
  * Classe représentant l'écran d'accueil du jeu.
@@ -93,7 +93,7 @@ public class EcranAccueil extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
+                .addContainerGap(96, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(72, 72, 72))
         );
