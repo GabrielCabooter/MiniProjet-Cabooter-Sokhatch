@@ -130,37 +130,38 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }
 
     private void configureColonneButtons(int nbColonnes) {
-        PanneauBoutonsHorizontaux.removeAll();
-        PanneauBoutonsHorizontaux.setLayout(new GridLayout(1, nbColonnes));
-        for (int i = 0; i < nbColonnes; i++) {
-            JButton btnColonne = new JButton("C" + (i + 1));
-            int colIndex = i;
-            btnColonne.addActionListener(evt -> {
-                gererCoup(() -> grille.activerColonneDeCellules(colIndex));
-
-            });
-            PanneauBoutonsHorizontaux.add(btnColonne);
-        }
-
-        PanneauBoutonsHorizontaux.revalidate();
-        PanneauBoutonsHorizontaux.repaint();
+    PanneauBoutonsHorizontaux.removeAll();
+    PanneauBoutonsHorizontaux.setLayout(new GridLayout(1, nbColonnes));
+    for (int i = 0; i < nbColonnes; i++) {
+        // Remplacement de "C1", "C2" par "▼"
+        JButton btnColonne = new JButton("▼");
+        int colIndex = i;
+        btnColonne.addActionListener(evt -> {
+            gererCoup(() -> grille.activerColonneDeCellules(colIndex));
+        });
+        PanneauBoutonsHorizontaux.add(btnColonne);
     }
+
+    PanneauBoutonsHorizontaux.revalidate();
+    PanneauBoutonsHorizontaux.repaint();
+}
 
     private void configureLigneButtons(int nbLignes) {
-        PanneauBoutonsVerticaux.removeAll();
-        PanneauBoutonsVerticaux.setLayout(new GridLayout(nbLignes, 1));
-        for (int i = 0; i < nbLignes; i++) {
-            JButton btnLigne = new JButton("L" + (i + 1));
-            int rowIndex = i;
-            btnLigne.addActionListener(evt -> {
-                gererCoup(() -> grille.activerLigneDeCellules(rowIndex));
-            });
-            PanneauBoutonsVerticaux.add(btnLigne);
-        }
-
-        PanneauBoutonsVerticaux.revalidate();
-        PanneauBoutonsVerticaux.repaint();
+    PanneauBoutonsVerticaux.removeAll();
+    PanneauBoutonsVerticaux.setLayout(new GridLayout(nbLignes, 1));
+    for (int i = 0; i < nbLignes; i++) {
+        // Remplacement de "L1", "L2" par "▶"
+        JButton btnLigne = new JButton("▶");
+        int rowIndex = i;
+        btnLigne.addActionListener(evt -> {
+            gererCoup(() -> grille.activerLigneDeCellules(rowIndex));
+        });
+        PanneauBoutonsVerticaux.add(btnLigne);
     }
+
+    PanneauBoutonsVerticaux.revalidate();
+    PanneauBoutonsVerticaux.repaint();
+}
 
     private void gererCoup(Runnable action) {
         action.run(); // Exécute l'action (ligne, colonne ou diagonale)
@@ -388,7 +389,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
         PanneauBoutonsDiagonales.setLayout(new java.awt.GridLayout(1, 3));
 
-        jButton11.setText("DA");
+        jButton11.setText("↗");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
@@ -396,7 +397,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         });
         PanneauBoutonsDiagonales.add(jButton11);
 
-        jButton12.setText("DD");
+        jButton12.setText("↘");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
