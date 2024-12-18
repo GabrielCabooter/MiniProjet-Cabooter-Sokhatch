@@ -1,43 +1,68 @@
 
+/**
+ * Nom du projet : CPASVERSAILLESICI
+ * Auteurs : Gabriel Cabooter et Arthur Sohkatch
+ * Date du projet : Du 20 novembre 2024 au 18 décembre 2024
+ */
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
+/**
+ * Fenêtre de victoire qui affiche les scores des joueurs et permet
+ * d'enregistrer le score actuel. La fenêtre affiche un tableau des scores
+ * précédents et permet à l'utilisateur de saisir son nom pour enregistrer son
+ * score après avoir gagné.
+ */
 public class FenetreVictoire extends javax.swing.JFrame {
-    private List<Score> scores;
-    private DefaultTableModel tableModel;  // Déclaration du modèle de table
-    private int tempsInitial;  // Variable pour stocker le temps initial en fonction de la difficulté
 
+    private List<Score> scores;  // Liste des scores enregistrés
+    private DefaultTableModel tableModel;  // Modèle de table pour afficher les scores
+    private int tempsInitial;  // Temps initial en fonction de la difficulté
+
+    /**
+     * Constructeur de la fenêtre de victoire. Initialise la fenêtre, charge les
+     * scores précédents, enregistre le score actuel, et met à jour le tableau
+     * des scores.
+     *
+     * @param nbCoups Le nombre de coups effectués pendant la partie.
+     * @param tempsRestant Le temps restant à la fin de la partie.
+     * @param nbLignes Le nombre de lignes dans la grille, utilisé pour
+     * déterminer la difficulté.
+     */
     public FenetreVictoire(int nbCoups, int tempsRestant, int nbLignes) {
-        // Initialisation des composants de la fenêtre (appelé par NetBeans)
+        // Initialisation des composants de la fenêtre
         initComponents();
-        
+
         scores = ScoreManager.chargerScores();  // Charge les scores précédents depuis le fichier
         setTitle("Victoire !");
-        setSize(600, 600);
+        setSize(600, 630);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        
-        // Déterminer la difficulté et initialiser le temps
+        // Déterminer la difficulté et initialiser le temps en fonction de celle-ci
         String difficulte = determinerDifficulte(nbLignes);
         initialiserTemps(difficulte);
-        
 
-        // Enregistre le score
+        // Enregistrer le score du joueur
         enregistrerScore(nbCoups, tempsRestant, difficulte);
 
         // Sauvegarde les scores dans le fichier
         ScoreManager.sauvegarderScores(scores);
 
-        // Initialiser le modèle de table et mettre à jour le tableau
+        // Initialiser le modèle de table et mettre à jour le tableau des scores
         initialiserTableModel();
         mettreAJourTableau();
     }
 
- 
-
-    // Méthode pour déterminer la difficulté en fonction du nombre de lignes
+    /**
+     * Détermine la difficulté en fonction du nombre de lignes.
+     *
+     * @param nbLignes Le nombre de lignes dans la grille.
+     * @return Une chaîne représentant la difficulté ("Facile", "Moyenne", ou
+     * "Difficile").
+     */
     private String determinerDifficulte(int nbLignes) {
         switch (nbLignes) {
             case 5:
@@ -49,7 +74,11 @@ public class FenetreVictoire extends javax.swing.JFrame {
         }
     }
 
-    // Méthode pour initialiser le temps en fonction de la difficulté
+    /**
+     * Initialise le temps en fonction de la difficulté choisie.
+     *
+     * @param difficulte La difficulté du jeu (Facile, Moyenne, ou Difficile).
+     */
     private void initialiserTemps(String difficulte) {
         switch (difficulte) {
             case "Facile":
@@ -66,7 +95,13 @@ public class FenetreVictoire extends javax.swing.JFrame {
         }
     }
 
-    // Méthode pour transformer le temps restant en temps joué
+    /**
+     * Transforme le temps restant en temps joué (différence entre le temps
+     * initial et le temps restant).
+     *
+     * @param tempsRestant Le temps restant à la fin de la partie.
+     * @return Le temps joué au format "mm:ss".
+     */
     private String formatTempsJoue(int tempsRestant) {
         // Le temps joué est la différence entre le temps initial et le temps restant
         int tempsJoue = tempsInitial - tempsRestant;
@@ -75,41 +110,52 @@ public class FenetreVictoire extends javax.swing.JFrame {
         return String.format("%02d:%02d", minutes, secondes);
     }
 
-    // Méthode pour enregistrer un score
+    /**
+     * Enregistre le score du joueur après la partie. Permet au joueur d'entrer
+     * son nom et enregistre le score avec les informations correspondantes.
+     *
+     * @param nbCoups Le nombre de coups effectués pendant la partie.
+     * @param tempsRestant Le temps restant à la fin de la partie.
+     * @param difficulte La difficulté choisie pour le jeu.
+     */
     private void enregistrerScore(int nbCoups, int tempsRestant, String difficulte) {
         String joueur = JOptionPane.showInputDialog(this, "Entrez votre nom :", "Nom du joueur", JOptionPane.QUESTION_MESSAGE);
         if (joueur == null || joueur.isBlank()) {
-            joueur = "Anonyme";
+            joueur = "Anonyme";  // Si le joueur ne saisit pas de nom, il est enregistré sous "Anonyme"
         }
         Score score = new Score(joueur, nbCoups, tempsRestant, difficulte);
         scores.add(score);
-        scores.sort((s1, s2) -> Integer.compare(s1.getScore(), s2.getScore())); // Tri croissant des scores
+        scores.sort((s1, s2) -> Integer.compare(s1.getScore(), s2.getScore())); // Trie les scores de manière croissante
     }
 
-    // Méthode pour initialiser le modèle de la table
+    /**
+     * Initialise le modèle de la table pour afficher les scores.
+     */
     private void initialiserTableModel() {
-        // Créez un modèle de table avec les colonnes appropriées
+        // Crée un modèle de table avec les colonnes appropriées
         tableModel = new DefaultTableModel(new Object[]{"Joueur", "Coups", "Temps Joué", "Difficulté", "Score"}, 0);
-        jTable1.setModel(tableModel);  // Assignez le modèle de table à votre jTable1
+        jTable1.setModel(tableModel);  // Assigne le modèle de table à votre jTable1
     }
 
-    // Méthode pour mettre à jour le tableau des scores
+    /**
+     * Met à jour le tableau des scores avec les scores enregistrés.
+     */
     private void mettreAJourTableau() {
         tableModel.setRowCount(0);  // Réinitialise le tableau
         for (Score score : scores) {
-            // Calculez le temps joué
+            // Calcule le temps joué et l'ajoute à la table
             String tempsJoue = formatTempsJoue(score.getTempsRestant());
-            
+
+            // Ajoute une ligne au tableau avec les informations du score
             tableModel.addRow(new Object[]{
                 score.getJoueur(),
                 score.getNbCoups(),
-                tempsJoue,  // Affichage du temps joué
+                tempsJoue, // Affichage du temps joué
                 score.getDifficulte(),
                 score.getScore()
             });
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,6 +207,8 @@ public class FenetreVictoire extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setBackground(new java.awt.Color(0, 153, 153));
+        jTable1.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -190,9 +238,6 @@ public class FenetreVictoire extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(147, 147, 147))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,7 +246,10 @@ public class FenetreVictoire extends javax.swing.JFrame {
                         .addGap(16, 16, 16))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))))
+                        .addGap(35, 35, 35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(189, 189, 189))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +287,7 @@ public class FenetreVictoire extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         ScoreManager.reinitialiserScores(); // Réinitialisation des scores
-           System.exit(0); // Ferme l'application
+        System.exit(0); // Ferme l'application
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -282,10 +330,8 @@ public class FenetreVictoire extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FenetreVictoire().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FenetreVictoire().setVisible(true);
         });
     }
 
@@ -293,7 +339,6 @@ public class FenetreVictoire extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
@@ -305,4 +350,3 @@ public class FenetreVictoire extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
-    

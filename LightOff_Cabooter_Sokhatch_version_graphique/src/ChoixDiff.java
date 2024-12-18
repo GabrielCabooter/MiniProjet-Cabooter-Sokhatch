@@ -1,25 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+
+/**
+ * Nom du projet : CPASVERSAILLESICI
+ * Auteurs : Gabriel Cabooter et Arthur Sohkatch
+ * Date du projet : Du 20 novembre 2024 au 18 décembre 2024
  */
 
 /**
- *
- * @author gabri
+ * Fenêtre permettant de sélectionner le niveau de difficulté du jeu
+ * CPASVERSAILLESICI. Cette fenêtre propose différentes options pour choisir le
+ * niveau de difficulté avant de commencer une partie.
  */
+
 public class ChoixDiff extends javax.swing.JFrame {
 
     /**
-     * Creates new form ChoixDiff
+     * Constructeur de la classe ChoixDiff. Initialise les composants et
+     * configure la fenêtre pour le choix de la difficulté.
      */
     public ChoixDiff() {
         initComponents();
+        
         setTitle("Choix Difficulté");
 
         setSize(500, 530); // Taille de la fenêtre
 
         setLocationRelativeTo(null); // Placer la fenêtre au centre de l'écran
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,23 +126,24 @@ public class ChoixDiff extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Facile : 5x5
         FenetrePrincipal fenetre = new FenetrePrincipal(5, 5);
         fenetre.setVisible(true);
-        this.dispose(); // Ferme la fenêtre actuelle        // TODO add your handling code here:
+        this.dispose();       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // Intermédiaire : 7x7
+        // Moyen : 7x7
         FenetrePrincipal fenetre = new FenetrePrincipal(7, 7);
         fenetre.setVisible(true);
-        this.dispose(); // Ferme la fenêtre actuelle    // TODO add your handling code here:
+        this.dispose(); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Difficile : 10x10
         FenetrePrincipal fenetre = new FenetrePrincipal(10, 10);
         fenetre.setVisible(true);
-        this.dispose(); // Ferme la fenêtre actuelle    // TODO add your handling code here:
+        this.dispose(); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

@@ -1,16 +1,27 @@
+/**
+ * Nom du projet : CPASVERSILLESICI
+ * Auteurs : Gabriel Cabooter et Arthur Sohkatch
+ * Date du projet : Du 20 novembre 2024 au 18 décembre 2024
+ * 
+ * Classe représentant l'écran d'accueil du jeu.
+ * Cette fenêtre permet de lancer le jeu, de consulter les règles ou de quitter l'application. 
+ */
 
 public class EcranAccueil extends javax.swing.JFrame {
 
-    
+    /**
+     * Constructeur de la classe EcranAccueil.
+     * Initialise la fenêtre et ses composants.
+     */
     public EcranAccueil() {
         initComponents();
         setTitle("Ecran D'Accueil");
-        // Centrer la fenêtre au milieu de l'écran
-        setLocationRelativeTo(null);
-        // Définir la taille de la fenêtre
-        setSize(500, 500);
+        setLocationRelativeTo(null);  // Centre la fenêtre sur l'écran
+        setSize(500, 500);  // Définir la taille de la fenêtre
     }
-
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,20 +130,20 @@ public class EcranAccueil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ChoixDiff s = new ChoixDiff();
-        s.setVisible(true);
+        ChoixDiff choixDiff = new ChoixDiff();
+        choixDiff.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        RegleDuJeu r = new RegleDuJeu();
+         RegleDuJeu r = new RegleDuJeu();
         r.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        System.exit(0); // Ferme l'application
+        ScoreManager.reinitialiserScores(); // Réinitialisation des scores
+           System.exit(0); // Ferme l'application
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -163,10 +174,8 @@ public class EcranAccueil extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EcranAccueil().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new EcranAccueil().setVisible(true);
         });
     }
 

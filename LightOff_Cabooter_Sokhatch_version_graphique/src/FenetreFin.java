@@ -1,12 +1,26 @@
-
+/**
+ * Nom du projet : CPASVERSAILLESICI
+ * Auteurs : Gabriel Cabooter et Arthur Sohkatch
+ * Date du projet : Du 20 novembre 2024 au 18 décembre 2024
+ * Fenêtre affichée à la fin de la partie lorsque le joueur termine le jeu.
+ * Cette fenêtre indique le nombre de coups joués et permet de fermer l'application.
+ */
 public class FenetreFin extends javax.swing.JFrame {
 
+    /**
+     * Constructeur de la fenêtre de fin de partie.
+     * Initialise les composants de l'interface et affiche un message indiquant
+     * le nombre de coups joués par le joueur.
+     *
+     * @param nbCoups Nombre de coups joués par le joueur durant la partie.
+     */
     public FenetreFin(int nbCoups) {
         initComponents();
         setTitle("Fin de la Partie");
         setSize(500, 500);
         setLocationRelativeTo(null);
 
+        // Affiche le message avec le nombre de coups joués
         jLabel1.setText("Temps écoulé ! Vous avez joué " + nbCoups + " coups.");
     }
 
@@ -151,10 +165,8 @@ public class FenetreFin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FenetreFin().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FenetreFin().setVisible(true);
         });
     }
 

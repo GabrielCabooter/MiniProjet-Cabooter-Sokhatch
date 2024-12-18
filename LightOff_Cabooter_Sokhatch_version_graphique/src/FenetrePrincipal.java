@@ -1,9 +1,18 @@
-
+/**
+ * Nom du projet : CPASVERSAILLESICI
+ * Auteurs : Gabriel Cabooter et Arthur Sohkatch
+ * Date du projet : Du 20 novembre 2024 au 18 décembre 2024
+ */
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.Timer;
 import miniprojet.GrilleDeCellules;
 
+/**
+ * Fenêtre principale du jeu CPASVERSAILLESICI, où l'utilisateur peut jouer en fonction de la grille
+ * et du niveau de difficulté sélectionné. Le temps et le nombre de coups sont suivis et le jeu
+ * se termine lorsque toutes les cellules sont éteintes ou que le temps est écoulé.
+ */
 public class FenetrePrincipal extends javax.swing.JFrame {
 
     private GrilleDeCellules grille;
@@ -13,7 +22,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     private Timer timer; // Le Timer pour mettre à jour le temps
 
     /**
-     * Creates new form FenetrePrincipale
+     * Constructeur de la fenêtre principale. Initialise la grille, les boutons de lignes et de colonnes,
+     * et configure le temps de jeu en fonction du niveau de difficulté (nbColonnes).
      *
      * @param nbLignes Nombre de lignes dans la grille
      * @param nbColonnes Nombre de colonnes dans la grille
@@ -67,32 +77,54 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         this.pack(); // Ajuste la fenêtre à son contenu
     }
 
-    // Formate le temps restant sous la forme mm:ss
+    /**
+     * Formate le temps restant sous la forme mm:ss.
+     *
+     * @param tempsRestant Temps restant en secondes.
+     * @return Le temps formaté sous forme "mm:ss".
+     */
     private String formatTemps(int tempsRestant) {
         int minutes = tempsRestant / 60;
         int secondes = tempsRestant % 60;
         return String.format("%02d:%02d", minutes, secondes);
     }
 
+    /**
+     * Affiche la fenêtre de fin lorsque le jeu est terminé.
+     */
     private void afficherFenetreFin() {
         FenetreFin fenetreFin = new FenetreFin(nbCoups);
         fenetreFin.setVisible(true);
-        dispose();
+        dispose(); // Ferme la fenêtre actuelle
     }
 
+    /**
+     * Vérifie si le joueur a gagné, c'est-à-dire si toutes les cellules sont éteintes.
+     * Si le joueur a gagné, une fenêtre de victoire est affichée.
+     */
     private void verifierVictoire() {
         if (grille.cellulesToutesEteintes()) {  // Vérifie si toutes les cellules sont éteintes
             timer.stop();
-            afficherFenetreVictoire();
+            afficherFenetreVictoire(); // Affiche la fenêtre de victoire
         }
     }
 
+    /**
+     * Affiche la fenêtre de victoire lorsque le joueur gagne.
+     */
     private void afficherFenetreVictoire() {
         FenetreVictoire fenetreVictoire = new FenetreVictoire(nbCoups, tempsRestant, nbLignes);
         fenetreVictoire.setVisible(true); // Affiche la fenêtre de victoire
         dispose(); // Ferme la fenêtre principale
     }
 
+    /**
+     * Configure le panneau de la grille avec le nombre de lignes et de colonnes spécifié.
+     * Le mélange des cellules est effectué en fonction de la difficulté du niveau.
+     *
+     * @param nbLignes Nombre de lignes dans la grille
+     * @param nbColonnes Nombre de colonnes dans la grille
+     */
     private void configureGrillePanel(int nbLignes, int nbColonnes) {
         // Déterminer le nombre de mélanges en fonction du nombre de lignes
         int nbMelanges;
@@ -129,47 +161,63 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         PanneauGrille.repaint();
     }
 
+    /**
+     * Configure les boutons représentant les colonnes de la grille.
+     *
+     * @param nbColonnes Nombre de colonnes dans la grille.
+     */
     private void configureColonneButtons(int nbColonnes) {
-    PanneauBoutonsHorizontaux.removeAll();
-    PanneauBoutonsHorizontaux.setLayout(new GridLayout(1, nbColonnes));
-    for (int i = 0; i < nbColonnes; i++) {
-        // Remplacement de "C1", "C2" par "▼"
-        JButton btnColonne = new JButton("▼");
-        int colIndex = i;
-        btnColonne.addActionListener(evt -> {
-            gererCoup(() -> grille.activerColonneDeCellules(colIndex));
-        });
-        PanneauBoutonsHorizontaux.add(btnColonne);
+        PanneauBoutonsHorizontaux.removeAll();
+        PanneauBoutonsHorizontaux.setLayout(new GridLayout(1, nbColonnes));
+        for (int i = 0; i < nbColonnes; i++) {
+            // Remplacement de "C1", "C2" par "▼"
+            JButton btnColonne = new JButton("▼");
+            int colIndex = i;
+            btnColonne.addActionListener(evt -> {
+                gererCoup(() -> grille.activerColonneDeCellules(colIndex));
+            });
+            PanneauBoutonsHorizontaux.add(btnColonne);
+        }
+
+        PanneauBoutonsHorizontaux.revalidate();
+        PanneauBoutonsHorizontaux.repaint();
     }
 
-    PanneauBoutonsHorizontaux.revalidate();
-    PanneauBoutonsHorizontaux.repaint();
-}
-
+    /**
+     * Configure les boutons représentant les lignes de la grille.
+     *
+     * @param nbLignes Nombre de lignes dans la grille.
+     */
     private void configureLigneButtons(int nbLignes) {
-    PanneauBoutonsVerticaux.removeAll();
-    PanneauBoutonsVerticaux.setLayout(new GridLayout(nbLignes, 1));
-    for (int i = 0; i < nbLignes; i++) {
-        // Remplacement de "L1", "L2" par "▶"
-        JButton btnLigne = new JButton("▶");
-        int rowIndex = i;
-        btnLigne.addActionListener(evt -> {
-            gererCoup(() -> grille.activerLigneDeCellules(rowIndex));
-        });
-        PanneauBoutonsVerticaux.add(btnLigne);
+        PanneauBoutonsVerticaux.removeAll();
+        PanneauBoutonsVerticaux.setLayout(new GridLayout(nbLignes, 1));
+        for (int i = 0; i < nbLignes; i++) {
+            // Remplacement de "L1", "L2" par "▶"
+            JButton btnLigne = new JButton("▶");
+            int rowIndex = i;
+            btnLigne.addActionListener(evt -> {
+                gererCoup(() -> grille.activerLigneDeCellules(rowIndex));
+            });
+            PanneauBoutonsVerticaux.add(btnLigne);
+        }
+
+        PanneauBoutonsVerticaux.revalidate();
+        PanneauBoutonsVerticaux.repaint();
     }
 
-    PanneauBoutonsVerticaux.revalidate();
-    PanneauBoutonsVerticaux.repaint();
-}
-
+    /**
+     * Gère un coup effectué par le joueur (activation d'une ligne, colonne ou diagonale).
+     * Incrémente le nombre de coups, met à jour l'affichage et vérifie si le joueur a gagné.
+     *
+     * @param action L'action à exécuter (activation d'une ligne, colonne ou diagonale).
+     */
     private void gererCoup(Runnable action) {
         action.run(); // Exécute l'action (ligne, colonne ou diagonale)
         nbCoups++; // Incrémente le compteur de coups
         jLabel2.setText("Coups: " + nbCoups); // Met à jour le texte du JLabel avec le nombre de coups
         repaint(); // Redessine la grille
 
-        verifierVictoire();
+        verifierVictoire(); // Vérifie si le joueur a gagné
     }
 
     /**
@@ -506,12 +554,10 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
         gererCoup(() -> this.grille.activerColonneDeCellules(0));
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
         gererCoup(() -> this.grille.activerColonneDeCellules(1));
     }//GEN-LAST:event_jButton14ActionPerformed
 
@@ -603,10 +649,8 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FenetrePrincipal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FenetrePrincipal().setVisible(true);
         });
     }
 

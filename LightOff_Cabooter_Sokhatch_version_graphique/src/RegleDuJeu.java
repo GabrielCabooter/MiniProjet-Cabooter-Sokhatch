@@ -1,9 +1,21 @@
 
+/**
+ * Nom du projet : CPASVERSAILLESICI
+ * Auteurs : Gabriel Cabooter et Arthur Sohkatch
+ * Date du projet : Du 20 novembre 2024 au 18 décembre 2024
+ */
 import javax.swing.*;
 
+/**
+ * Fenêtre affichant les règles du jeu CPASVERSAILLESICI.
+ * Cette fenêtre contient un texte détaillant les règles et les instructions pour jouer au jeu.
+ */
 public class RegleDuJeu extends JFrame {
 
-// Déclaration des composants
+    /**
+     * Constructeur de la classe RegleDuJeu.
+     * Initialise les composants et affiche les règles du jeu dans la fenêtre.
+     */
     public RegleDuJeu() {
         initComponents();
         setTitle("Règles du Jeu");
@@ -53,8 +65,9 @@ public class RegleDuJeu extends JFrame {
         jTextArea1.setEditable(false); // Empêcher l'édition du texte
         jTextArea1.setLineWrap(true); // Activer le retour à la ligne automatique
         jTextArea1.setWrapStyleWord(true); // Le texte se coupe aux espaces pour éviter de couper des mots
-
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -145,10 +158,8 @@ public class RegleDuJeu extends JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegleDuJeu().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new RegleDuJeu().setVisible(true);
         });
     }
 
