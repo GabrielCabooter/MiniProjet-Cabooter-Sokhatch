@@ -5,10 +5,7 @@ import javax.swing.JButton;
 import miniprojet.CelluleLumineuse;
 
 
-public class CelluleGraphique extends JButton {
-
-    int largeur; // largeur en pixel de la cellule 
-    int hauteur; // hauteur en pixel de la cellule 
+public class CelluleGraphique extends JButton {// largeur en pixel de la cellule
     CelluleLumineuse celluleLumineuseAssociee;
 
     // Couleurs pour les états allumée et éteinte
@@ -23,8 +20,6 @@ public class CelluleGraphique extends JButton {
      * @param h hauteur en pixels
      */
     public CelluleGraphique(CelluleLumineuse celluleLumineuseAssociee, int l, int h) {
-        this.largeur = l;
-        this.hauteur = h;
         this.celluleLumineuseAssociee = celluleLumineuseAssociee;
 
         // Configuration de base du bouton

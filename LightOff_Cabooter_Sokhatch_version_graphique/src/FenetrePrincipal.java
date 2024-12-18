@@ -8,6 +8,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
 
     private GrilleDeCellules grille;
     private int nbCoups;
+    private int nbLignes;
     private int tempsRestant; // Variable pour suivre le temps restant
     private Timer timer; // Le Timer pour mettre à jour le temps
 
@@ -21,7 +22,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
         initComponents(); // Initialise tous les composants de l'interface, y compris jLabel1
         setTitle("CPASVERSAILLESICI!!!");
         setLocationRelativeTo(null);
-
+        this.nbLignes = nbLignes; // Initialise le nombre de lignes
         this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
 
         // Configuration des panneaux
@@ -87,7 +88,7 @@ public class FenetrePrincipal extends javax.swing.JFrame {
     }
 
     private void afficherFenetreVictoire() {
-        FenetreVictoire fenetreVictoire = new FenetreVictoire(nbCoups, tempsRestant); // Passe les deux paramètres
+        FenetreVictoire fenetreVictoire = new FenetreVictoire(nbCoups, tempsRestant, nbLignes);
         fenetreVictoire.setVisible(true); // Affiche la fenêtre de victoire
         dispose(); // Ferme la fenêtre principale
     }
